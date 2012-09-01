@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE71E49C15F1F7C500F6BEC7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE71E49B15F1F7C400F6BEC7 /* FacebookSDK.framework */; };
+		CE71E49F15F1F7F000F6BEC7 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE71E49E15F1F7F000F6BEC7 /* FacebookSDKResources.bundle */; };
 		CE82263415EDE0F30027A592 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE82263315EDE0F30027A592 /* UIKit.framework */; };
 		CE82263615EDE0F30027A592 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE82263515EDE0F30027A592 /* Foundation.framework */; };
 		CE82263815EDE0F30027A592 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE82263715EDE0F30027A592 /* CoreGraphics.framework */; };
@@ -35,27 +37,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE71E49B15F1F7C400F6BEC7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		CE71E49E15F1F7F000F6BEC7 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		CE82262F15EDE0F30027A592 /* RandomPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82263315EDE0F30027A592 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE82263515EDE0F30027A592 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CE82263715EDE0F30027A592 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		CE82263B15EDE0F30027A592 /* RandomPhoto-Info.plist */ = {isa = PBXFileReference; path = "RandomPhoto-Info.plist"; sourceTree = "<group>"; };
+		CE82263B15EDE0F30027A592 /* RandomPhoto-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RandomPhoto-Info.plist"; sourceTree = "<group>"; };
 		CE82263D15EDE0F30027A592 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CE82263F15EDE0F30027A592 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CE82264115EDE0F30027A592 /* RandomPhoto-Prefix.pch */ = {isa = PBXFileReference; path = "RandomPhoto-Prefix.pch"; sourceTree = "<group>"; };
-		CE82264215EDE0F30027A592 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		CE82264115EDE0F30027A592 /* RandomPhoto-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RandomPhoto-Prefix.pch"; sourceTree = "<group>"; };
+		CE82264215EDE0F30027A592 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE82264315EDE0F30027A592 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CE82264615EDE0F30027A592 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		CE82264915EDE0F30027A592 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		CE82264B15EDE0F30027A592 /* MasterViewController.h */ = {isa = PBXFileReference; path = MasterViewController.h; sourceTree = "<group>"; };
+		CE82264B15EDE0F30027A592 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		CE82264C15EDE0F30027A592 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		CE82264E15EDE0F30027A592 /* DetailViewController.h */ = {isa = PBXFileReference; path = DetailViewController.h; sourceTree = "<group>"; };
+		CE82264E15EDE0F30027A592 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		CE82264F15EDE0F30027A592 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		CE82265615EDE0F30027A592 /* RandomPhotoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RandomPhotoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82265715EDE0F30027A592 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		CE82265F15EDE0F30027A592 /* RandomPhotoTests-Info.plist */ = {isa = PBXFileReference; path = "RandomPhotoTests-Info.plist"; sourceTree = "<group>"; };
+		CE82265F15EDE0F30027A592 /* RandomPhotoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RandomPhotoTests-Info.plist"; sourceTree = "<group>"; };
 		CE82266115EDE0F30027A592 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		CE82266315EDE0F30027A592 /* RandomPhotoTests.h */ = {isa = PBXFileReference; path = RandomPhotoTests.h; sourceTree = "<group>"; };
+		CE82266315EDE0F30027A592 /* RandomPhotoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RandomPhotoTests.h; sourceTree = "<group>"; };
 		CE82266415EDE0F30027A592 /* RandomPhotoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RandomPhotoTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +71,7 @@
 				CE82263415EDE0F30027A592 /* UIKit.framework in Frameworks */,
 				CE82263615EDE0F30027A592 /* Foundation.framework in Frameworks */,
 				CE82263815EDE0F30027A592 /* CoreGraphics.framework in Frameworks */,
+				CE71E49C15F1F7C500F6BEC7 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +110,8 @@
 		CE82263215EDE0F30027A592 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE71E49E15F1F7F000F6BEC7 /* FacebookSDKResources.bundle */,
+				CE71E49B15F1F7C400F6BEC7 /* FacebookSDK.framework */,
 				CE82263315EDE0F30027A592 /* UIKit.framework */,
 				CE82263515EDE0F30027A592 /* Foundation.framework */,
 				CE82263715EDE0F30027A592 /* CoreGraphics.framework */,
@@ -232,6 +239,7 @@
 				CE82263E15EDE0F30027A592 /* InfoPlist.strings in Resources */,
 				CE82264715EDE0F30027A592 /* MainStoryboard_iPhone.storyboard in Resources */,
 				CE82264A15EDE0F30027A592 /* MainStoryboard_iPad.storyboard in Resources */,
+				CE71E49F15F1F7F000F6BEC7 /* FacebookSDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,9 +385,14 @@
 		CE82266915EDE0F30027A592 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Documents/FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RandomPhoto/RandomPhoto-Prefix.pch";
 				INFOPLIST_FILE = "RandomPhoto/RandomPhoto-Info.plist";
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -388,9 +401,14 @@
 		CE82266A15EDE0F30027A592 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Documents/FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RandomPhoto/RandomPhoto-Prefix.pch";
 				INFOPLIST_FILE = "RandomPhoto/RandomPhoto-Info.plist";
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -449,6 +467,7 @@
 				CE82266A15EDE0F30027A592 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE82266B15EDE0F30027A592 /* Build configuration list for PBXNativeTarget "RandomPhotoTests" */ = {
 			isa = XCConfigurationList;
@@ -457,6 +476,7 @@
 				CE82266D15EDE0F30027A592 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
