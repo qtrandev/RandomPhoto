@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -15,9 +16,22 @@
 
 @implementation DetailViewController
 
+@synthesize label = _label;
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
+
+- (void)login:(id)sender {
+    [FBSession openActiveSessionWithPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        // session might now be open.
+        if (session.isOpen) {
+            FBRequest *me = [FBRequest requestForMe];
+            [me startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *my, NSError *error) {
+                self.label.text = my.first_name;
+            }];
+        }
+    }];
+}
 
 #pragma mark - Managing the detail item
 
@@ -53,6 +67,7 @@
 
 - (void)viewDidUnload
 {
+    [self setLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.detailDescriptionLabel = nil;

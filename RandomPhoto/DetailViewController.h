@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *label;
+- (IBAction)login:(id)sender;
 
 @property (strong, nonatomic) id detailItem;
 
