@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation AppDelegate
 
@@ -21,6 +22,10 @@
         splitViewController.delegate = (id)navigationController.topViewController;
     }
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [FBSession.activeSession handleOpenURL:url];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
