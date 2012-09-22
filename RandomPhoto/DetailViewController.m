@@ -16,6 +16,7 @@
 
 @implementation DetailViewController
 
+@synthesize button = _button;
 @synthesize label = _label;
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
@@ -24,13 +25,21 @@
 - (void)login:(id)sender {
     [FBSession openActiveSessionWithPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
         // session might now be open.
-        if (session.isOpen) {
+        if (session.isOpen && [self.button.titleLabel.text isEqualToString:@"Login"]) {
             FBRequest *me = [FBRequest requestForMe];
             [me startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *my, NSError *error) {
                 self.label.text = my.first_name;
+                [self.button setTitle:@"Logout" forState:UIControlStateNormal];
             }];
         }
     }];
+}
+
+- (void)logout:(id)sender{
+    if (FBSession.activeSession.isOpen) {
+        [FBSession.activeSession closeAndClearTokenInformation];
+        [self.button setTitle:@"Login" forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - Managing the detail item
@@ -68,6 +77,7 @@
 - (void)viewDidUnload
 {
     [self setLabel:nil];
+    [self setButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.detailDescriptionLabel = nil;
