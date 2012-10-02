@@ -10,8 +10,10 @@
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *button;
+@property (strong, nonatomic) IBOutlet UIButton *goButton;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 - (IBAction)login:(id)sender;
+- (IBAction)goButtonClicked:(id)sender;
 
 @property (strong, nonatomic) id detailItem;
 

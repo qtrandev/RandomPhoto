@@ -17,6 +17,7 @@
 @implementation DetailViewController
 
 @synthesize button = _button;
+@synthesize goButton = _goButton;
 @synthesize label = _label;
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
@@ -33,7 +34,8 @@
              if (!error) {
                  [self.label setText: [NSString stringWithFormat:@"Hi %@!", user.name]];
                  [self.button setTitle:@"Logout" forState:UIControlStateNormal];
-                 [self.detailDescriptionLabel setText:@"You are now ready to get started. Click the button to start viewing friends' photos."];
+                 [self.goButton setHidden:NO];
+                 [self.detailDescriptionLabel setText:@"You are now ready to get started. Click the Go button to start viewing friends' photos."];
                  self.navigationItem.title = @"Let's Go!";
              }
              [self showLoadingIndicator:NO];
@@ -42,6 +44,7 @@
     } else {
         [self.label setText:@"Welcome! Please login."];
         [self.button setTitle:@"Login" forState:UIControlStateNormal];
+        [self.goButton setHidden:YES];
         [self.detailDescriptionLabel setText:@"Logging in allows you to access photos of your friends."];
     }
 }
@@ -62,6 +65,9 @@
             [self initPanel];
         }];
     }
+}
+
+- (IBAction)goButtonClicked:(id)sender {
 }
 
 - (void)logout{
@@ -106,6 +112,7 @@
 {
     [self setLabel:nil];
     [self setButton:nil];
+    [self setGoButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     self.detailDescriptionLabel = nil;
