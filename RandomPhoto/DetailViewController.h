@@ -12,7 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 - (IBAction)login:(id)sender;
-- (IBAction)logout:(id)sender;
 
 @property (strong, nonatomic) id detailItem;
 

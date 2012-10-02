@@ -22,23 +22,52 @@
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
 
-- (void)login:(id)sender {
-    [FBSession openActiveSessionWithPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-        // session might now be open.
-        if (session.isOpen && [self.button.titleLabel.text isEqualToString:@"Login"]) {
-            FBRequest *me = [FBRequest requestForMe];
-            [me startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *my, NSError *error) {
-                self.label.text = my.first_name;
-                [self.button setTitle:@"Logout" forState:UIControlStateNormal];
-            }];
-        }
-    }];
+- (void)initPanel {
+    self.navigationItem.title = @"Getting Started";
+    if (FBSession.activeSession.isOpen) {
+        [self showLoadingIndicator:YES];
+        [[FBRequest requestForMe] startWithCompletionHandler:
+         ^(FBRequestConnection *connection,
+           NSDictionary<FBGraphUser> *user,
+           NSError *error) {
+             if (!error) {
+                 [self.label setText: [NSString stringWithFormat:@"Hi %@!", user.name]];
+                 [self.button setTitle:@"Logout" forState:UIControlStateNormal];
+                 [self.detailDescriptionLabel setText:@"You are now ready to get started. Click the button to start viewing friends' photos."];
+                 self.navigationItem.title = @"Let's Go!";
+             }
+             [self showLoadingIndicator:NO];
+         }];
+        
+    } else {
+        [self.label setText:@"Welcome! Please login."];
+        [self.button setTitle:@"Login" forState:UIControlStateNormal];
+        [self.detailDescriptionLabel setText:@"Logging in allows you to access photos of your friends."];
+    }
 }
 
-- (void)logout:(id)sender{
+- (void)showLoadingIndicator:(BOOL)show {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
+}
+
+#pragma mark - Login/logout
+
+/** Handles both login and logout */
+- (void)login:(id)sender {
+    if (FBSession.activeSession.isOpen) {
+        [self logout];
+    } else {
+        [FBSession openActiveSessionWithPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            // session might now be open.
+            [self initPanel];
+        }];
+    }
+}
+
+- (void)logout{
     if (FBSession.activeSession.isOpen) {
         [FBSession.activeSession closeAndClearTokenInformation];
-        [self.button setTitle:@"Login" forState:UIControlStateNormal];
+        [self initPanel];
     }
 }
 
@@ -61,16 +90,15 @@
 - (void)configureView
 {
     // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
-    }
 }
+
+#pragma mark - View load/unload
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self initPanel];
     [self configureView];
 }
 
@@ -96,7 +124,7 @@
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
+    barButtonItem.title = NSLocalizedString(@"Menu", @"Menu");
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;
 }
