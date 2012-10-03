@@ -13,4 +13,5 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
+- (IBAction)goClicked:(id)sender;
 @end

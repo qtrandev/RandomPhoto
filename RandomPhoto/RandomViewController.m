@@ -7,6 +7,7 @@
 //
 
 #import "RandomViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface RandomViewController ()
 
@@ -15,6 +16,26 @@
 @implementation RandomViewController
 @synthesize scrollView;
 @synthesize imageView;
+
+- (void)requestFriends {
+    if (FBSession.activeSession.isOpen) {
+        [[FBRequest requestForMyFriends] startWithCompletionHandler:
+         ^(FBRequestConnection *connection,
+           NSDictionary *result,
+           NSError *error) {
+             if (!error) {
+                 NSArray* friends  = [result objectForKey:@"data"];
+                 NSLog(@"Found: %i friends", friends.count);
+                 for (NSDictionary<FBGraphUser>* friend in friends) {
+                     //NSLog(@"%@ id %@", friend.name, friend.id);
+                 }
+                 NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [friends objectAtIndex:arc4random()%friends.count];
+                 
+                 [self displayProfileImage:friend1.id];
+             }
+         }];
+    }
+}
 
 - (void)displayProfileImage:(NSString *)fId {
     NSString *picLink = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", fId];
@@ -41,6 +62,7 @@
 	// Do any additional setup after loading the view.
     //[self displayProfileImage:@"100248354"];
     [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+    [self requestFriends];
 }
 
 - (void)viewDidUnload
@@ -61,4 +83,7 @@
     return imageView;
 }
 
+- (IBAction)goClicked:(id)sender {
+    [self requestFriends];
+}
 @end
