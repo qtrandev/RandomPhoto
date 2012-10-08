@@ -25,20 +25,22 @@
            NSError *error) {
              if (!error) {
                  NSArray* friends  = [result objectForKey:@"data"];
-                 NSLog(@"Found: %i friends", friends.count);
+                 //NSLog(@"Found: %i friends", friends.count);
                  for (NSDictionary<FBGraphUser>* friend in friends) {
                      //NSLog(@"%@ id %@", friend.name, friend.id);
                  }
                  NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [friends objectAtIndex:arc4random()%friends.count];
                  
+                 [scrollView setZoomScale:1.0f]; // reset zoom
                  [self displayProfileImage:friend1.id];
+                 self.navigationItem.title = friend1.name;
              }
          }];
     }
 }
 
 - (void)displayProfileImage:(NSString *)fId {
-    NSString *picLink = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", fId];
+    NSString *picLink = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", fId];
     [self displayImageLink:picLink];
 }
 
