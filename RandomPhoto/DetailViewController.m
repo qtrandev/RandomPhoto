@@ -60,7 +60,8 @@
     if (FBSession.activeSession.isOpen) {
         [self logout];
     } else {
-        [FBSession openActiveSessionWithPermissions:nil allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        NSArray *permissions = [NSArray arrayWithObjects:@"friends_photos", nil];
+        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
             // session might now be open.
             [self initPanel];
         }];
