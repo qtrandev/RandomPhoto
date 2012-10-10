@@ -7,8 +7,8 @@
 //
 
 #import "MasterViewController.h"
-
 #import "DetailViewController.h"
+#import "FriendViewController.h"
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -126,8 +126,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSDate *object = [_objects objectAtIndex:indexPath.row];
+
+    } else {
+        NSString *object = [_objects objectAtIndex:indexPath.row];
         //self.detailViewController.detailItem = object;
+        if ([object isEqualToString:@"Random Photo"]) {
+            DetailViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
+            //[self presentViewController:dvc animated:YES completion:nil];
+            [self.navigationController pushViewController:dvc animated:YES];
+        } else if ([object isEqualToString:@"Friends"]) {
+            FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
+            //[self presentViewController:fvc animated:YES completion:nil];
+            [self.navigationController pushViewController:fvc animated:YES];
+        }
     }
 }
 
