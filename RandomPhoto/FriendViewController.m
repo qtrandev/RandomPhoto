@@ -9,17 +9,25 @@
 #import "FriendViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface FriendViewController () {
-    NSDictionary<FBGraphUser>* friend;
-}
+@interface FriendViewController () <
+    FBFriendPickerDelegate> 
+@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
+@property (strong, nonatomic) NSDictionary<FBGraphUser>* friend;
+
 @end
 
 @implementation FriendViewController
 @synthesize scrollView;
 @synthesize imageView;
+@synthesize friendPickerController = _friendPickerController;
+@synthesize friend;
 
 - (void)initPanel {
-    [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+    [self displayCurrentUser];
+}
+
+- (void)displayCurrentUser {
+    self.navigationItem.title = friend.first_name;
     [self showUserProfileImage];
 }
 
@@ -31,6 +39,10 @@
 - (void)displayImageLink:(NSString *)picLink {
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picLink]]];
     [imageView setImage:(image)];
+}
+
+- (void)showLoadingIndicator:(BOOL)show {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -69,22 +81,41 @@
 
 /** Login if the user hasn't logged in yet */
 - (void)login {
+    [self showLoadingIndicator:YES];
     if (!FBSession.activeSession.isOpen) {
         NSArray *permissions = [NSArray arrayWithObjects:@"friends_photos", nil];
         [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            // session might now be open.
-            [[FBRequest requestForMe] startWithCompletionHandler:
-             ^(FBRequestConnection *connection,
-               NSDictionary<FBGraphUser> *user,
-               NSError *error) {
-                 if (!error) {
-                     friend = user;
-                 }
-             }];
-            [self initPanel];
+            if (!error) {
+                // session might now be open.
+                [self requestCurrentUser];
+            } else {
+                [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+            }
         }];
     } else {
-        [self initPanel];
+        [self requestCurrentUser];
+    }
+}
+
+- (void) requestCurrentUser {
+    [[FBRequest requestForMe] startWithCompletionHandler:
+     ^(FBRequestConnection *connection,
+       NSDictionary<FBGraphUser> *user,
+       NSError *error) {
+         if (!error) {
+             [self showLoadingIndicator:NO];
+             friend = user;
+             [self initPanel];
+         }
+     }];
+}
+
+- (void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker
+{
+    if (friendPicker.selection.count == 1) {
+        friend = [friendPicker.selection objectAtIndex:0];
+        [self.navigationController popViewControllerAnimated:YES];
+        [self displayCurrentUser];
     }
 }
 
@@ -93,7 +124,21 @@
 }
 
 - (IBAction)pickClicked:(id)sender {
+    [self displayFriendPicker];
+}
+
+- (void)displayFriendPicker {
+    if (!self.friendPickerController) {
+        self.friendPickerController = [[FBFriendPickerViewController alloc] initWithNibName:nil bundle:nil];
+        
+        // Set the friend picker delegate
+        self.friendPickerController.delegate = self;
+        self.friendPickerController.title = @"Select friends";
+        self.friendPickerController.allowsMultipleSelection = NO;
+    }
     
+    [self.friendPickerController loadData];
+    [self.navigationController pushViewController:self.friendPickerController animated:true];
 }
 
 @end
