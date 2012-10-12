@@ -9,8 +9,9 @@
 #import "FriendViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface FriendViewController ()
-
+@interface FriendViewController () {
+    NSDictionary<FBGraphUser>* friend;
+}
 @end
 
 @implementation FriendViewController
@@ -19,6 +20,12 @@
 
 - (void)initPanel {
     [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+    [self showUserProfileImage];
+}
+
+- (void)showUserProfileImage {
+    NSString *picLink = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", friend.id];
+    [self displayImageLink:picLink];
 }
 
 - (void)displayImageLink:(NSString *)picLink {
@@ -66,6 +73,14 @@
         NSArray *permissions = [NSArray arrayWithObjects:@"friends_photos", nil];
         [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
             // session might now be open.
+            [[FBRequest requestForMe] startWithCompletionHandler:
+             ^(FBRequestConnection *connection,
+               NSDictionary<FBGraphUser> *user,
+               NSError *error) {
+                 if (!error) {
+                     friend = user;
+                 }
+             }];
             [self initPanel];
         }];
     } else {
