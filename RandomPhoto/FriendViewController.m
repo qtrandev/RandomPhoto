@@ -27,7 +27,7 @@
 }
 
 - (void)displayCurrentUser {
-    self.navigationItem.title = friend.first_name;
+    [self setTitleBar];
     [self showUserProfileImage];
 }
 
@@ -37,7 +37,10 @@
 }
 
 - (void)displayImageLink:(NSString *)picLink {
+    [self showLoadingIndicator:YES];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picLink]]];
+    [self showLoadingIndicator:NO];
+    [self resetZoom];
     [imageView setImage:(image)];
 }
 
@@ -114,7 +117,7 @@
 {
     if (friendPicker.selection.count == 1) {
         friend = [friendPicker.selection objectAtIndex:0];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToViewController:self animated:YES];
         [self displayCurrentUser];
     }
 }
@@ -122,6 +125,7 @@
 - (IBAction)goClicked:(id)sender {
     [self showLoadingIndicator:YES];
     [self requestAlbums:friend.id];
+    [self setTitleBar];
 }
 
 - (void)requestAlbums:(NSString *)friendId {
@@ -187,6 +191,7 @@
 
 
 - (IBAction)pickClicked:(id)sender {
+    [self setTitleBar];
     [self displayFriendPicker];
 }
 
@@ -202,6 +207,14 @@
     
     [self.friendPickerController loadData];
     [self.navigationController pushViewController:self.friendPickerController animated:true];
+}
+
+- (void)resetZoom {
+    [scrollView setZoomScale:1.0f];
+}
+
+- (void)setTitleBar {
+    self.navigationItem.title = friend.first_name;
 }
 
 @end
