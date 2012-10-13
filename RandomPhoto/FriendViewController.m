@@ -86,7 +86,10 @@
 - (void)login {
     [self showLoadingIndicator:YES];
     if (!FBSession.activeSession.isOpen) {
-        NSArray *permissions = [NSArray arrayWithObjects:@"friends_photos", nil];
+        NSArray *permissions = [NSArray arrayWithObjects:
+                                @"user_photos",
+                                @"friends_photos",
+                                nil];
         [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
             if (!error) {
                 // session might now be open.
@@ -144,7 +147,7 @@
                  [self requestAlbumPhotos:[randomAlbum objectForKey:@"id"]];
              } else {
                  // Try again with a different friend
-                 self.navigationItem.title = @"No album found";
+                 self.navigationItem.title = @"No albums found";
                  [self showLoadingIndicator:NO];
              }
          }
