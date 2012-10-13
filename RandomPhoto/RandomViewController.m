@@ -31,17 +31,29 @@
                  //}
                  NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [friends objectAtIndex:arc4random()%friends.count];
                  
-                 [scrollView setZoomScale:1.0f]; // reset zoom
+                 [self resetZoom];
                  [self displayProfileImage:friend1.id];
                  self.navigationItem.title = friend1.name;
                  [self requestAlbums:friend1.id];
+             } else {
+                 NSLog(@"Error sending request");
+                 [self showLoadingIndicator:NO];
              }
          }];
     }
 }
 
+- (void)showLoadingIndicator:(BOOL)show {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
+}
+
+- (void)resetZoom {
+    [scrollView setZoomScale:1.0f];
+}
+
 - (void)displayProfileImage:(NSString *)fId {
     NSString *picLink = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", fId];
+    [self resetZoom];
     [self displayImageLink:picLink];
 }
 
@@ -87,6 +99,7 @@
          }
          else {
              NSLog(@"Albums error");
+             [self showLoadingIndicator:NO];
          }
      }
      ];
@@ -108,6 +121,7 @@
                  FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
                  NSString* photoLink = [randomPhoto objectForKey:@"source"];
                  [self displayImageLink:photoLink];
+                 [self showLoadingIndicator:NO];
                  
              } else {
                  // Try again with a different friend
@@ -116,6 +130,7 @@
          }
          else {
              NSLog(@"Error getting album photos");
+             [self showLoadingIndicator:NO];
          }
      }
      ];
@@ -159,6 +174,7 @@
 }
 
 - (IBAction)goClicked:(id)sender {
+    [self showLoadingIndicator:YES];
     [self requestFriends];
 }
 @end
