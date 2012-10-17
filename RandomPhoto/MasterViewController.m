@@ -8,6 +8,7 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "RandomViewController.h"
 #import "FriendViewController.h"
 
 @interface MasterViewController () {
@@ -131,9 +132,9 @@
         NSString *object = [_objects objectAtIndex:indexPath.row];
         //self.detailViewController.detailItem = object;
         if ([object isEqualToString:@"Random Photo"]) {
-            DetailViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
+            RandomViewController* rvc = [self.storyboard instantiateViewControllerWithIdentifier:@"rvc1"];
             //[self presentViewController:dvc animated:YES completion:nil];
-            [self.navigationController pushViewController:dvc animated:YES];
+            [self.navigationController pushViewController:rvc animated:YES];
         } else if ([object isEqualToString:@"Friends"]) {
             FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
             //[self presentViewController:fvc animated:YES completion:nil];

@@ -115,7 +115,6 @@
                                 </state>
                                 <connections>
                                     <action selector="goButtonClicked:" destination="21" eventType="touchUpInside" id="gfC-zg-Vcl"/>
-                                    <segue destination="oaH-uY-Xea" kind="push" id="OF4-9R-6Ru"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -201,7 +200,7 @@
         <scene sceneID="249-DY-b3j">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XrQ-P2-fcG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="oaH-uY-Xea" customClass="RandomViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rvc1" id="oaH-uY-Xea" customClass="RandomViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gme-Id-AiF">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

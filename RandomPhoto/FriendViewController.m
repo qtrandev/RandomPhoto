@@ -7,6 +7,7 @@
 //
 
 #import "FriendViewController.h"
+#import "DetailViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface FriendViewController () <
@@ -61,7 +62,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self login];
+    //[self login];
+    if ([self checkLogin:NO]) {
+        [self requestCurrentUser];
+    } else {
+        [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+    }
 }
 
 - (void)viewDidUnload
@@ -122,13 +128,36 @@
         friend = [friendPicker.selection objectAtIndex:0];
         [self.navigationController popToViewController:self animated:YES];
         [self displayCurrentUser];
+        [self requestFriend];
     }
 }
 
 - (IBAction)goClicked:(id)sender {
-    [self showLoadingIndicator:YES];
-    [self requestAlbums:friend.id];
-    [self setTitleBar];
+    [self requestFriend];
+}
+
+- (void)requestFriend {
+    if ([self checkLogin:YES]) {
+        [self showLoadingIndicator:YES];
+        [self requestAlbums:friend.id];
+        [self setTitleBar];
+    }
+}
+
+- (BOOL)checkLogin:(BOOL)displayLoginWindow {
+    if (!FBSession.activeSession.isOpen) {
+        if (displayLoginWindow) {
+            [self displayLoginScreen];
+        }
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (void)displayLoginScreen {
+    DetailViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 - (void)requestAlbums:(NSString *)friendId {
@@ -194,8 +223,10 @@
 
 
 - (IBAction)pickClicked:(id)sender {
-    [self setTitleBar];
-    [self displayFriendPicker];
+    if ([self checkLogin:YES]) {
+        [self setTitleBar];
+        [self displayFriendPicker];
+    }
 }
 
 - (void)displayFriendPicker {

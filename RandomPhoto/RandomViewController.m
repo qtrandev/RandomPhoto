@@ -7,6 +7,7 @@
 //
 
 #import "RandomViewController.h"
+#import "DetailViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface RandomViewController ()
@@ -152,7 +153,9 @@
 	// Do any additional setup after loading the view.
     //[self displayProfileImage:@"100248354"];
     [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
-    [self requestFriends];
+    if ([self checkLogin:NO]) {
+        [self requestFriends];
+    }
 }
 
 - (void)viewDidUnload
@@ -174,7 +177,25 @@
 }
 
 - (IBAction)goClicked:(id)sender {
-    [self showLoadingIndicator:YES];
-    [self requestFriends];
+    if ([self checkLogin:YES]) {
+        [self showLoadingIndicator:YES];
+        [self requestFriends];
+    }
+}
+
+- (BOOL)checkLogin:(BOOL)displayLoginWindow {
+    if (!FBSession.activeSession.isOpen) {
+        if (displayLoginWindow) {
+            [self displayLoginScreen];
+        }
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (void)displayLoginScreen {
+    DetailViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
+    [self.navigationController pushViewController:dvc animated:YES];
 }
 @end

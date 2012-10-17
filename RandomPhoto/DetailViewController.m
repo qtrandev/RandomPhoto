@@ -69,6 +69,7 @@
 }
 
 - (IBAction)goButtonClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)logout{
