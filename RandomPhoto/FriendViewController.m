@@ -148,7 +148,7 @@
     FBRequestConnection *connection = [[FBRequestConnection alloc] init];
     FBRequest *request = [FBRequest
                           requestForGraphPath:
-                          [NSString stringWithFormat:@"%@?fields=albums",friendId]];
+                          [NSString stringWithFormat:@"%@?fields=albums.limit(0)",friendId]];
     [connection addRequest:request completionHandler:
      ^(FBRequestConnection *connection, id result, NSError *error) {
          if (!error && result) {
@@ -177,7 +177,7 @@
     FBRequestConnection *connection = [[FBRequestConnection alloc] init];
     FBRequest *request = [FBRequest
                           requestForGraphPath:
-                          [NSString stringWithFormat:@"%@?fields=photos",albumId]];
+                          [NSString stringWithFormat:@"%@?fields=photos.limit(0)",albumId]];
     [connection addRequest:request completionHandler:
      ^(FBRequestConnection *connection, id result, NSError *error) {
          if (!error && result) {
