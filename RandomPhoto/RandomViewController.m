@@ -151,10 +151,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //[self displayProfileImage:@"100248354"];
-    [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     if ([self checkLogin:NO]) {
+        [self showLoadingIndicator:YES];
         [self requestFriends];
+    } else {
+        [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
     }
 }
 
