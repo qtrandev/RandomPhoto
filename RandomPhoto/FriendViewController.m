@@ -62,11 +62,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //[self login];
-    if ([self checkLogin:NO]) {
-        [self requestCurrentUser];
-    } else {
-        [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (friend == nil) {
+        if ([self checkLogin:YES]) {
+            [self requestCurrentUser];
+        } else {
+            [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+        }
     }
 }
 
@@ -86,27 +91,6 @@
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     
     return imageView;
-}
-
-/** Login if the user hasn't logged in yet */
-- (void)login {
-    [self showLoadingIndicator:YES];
-    if (!FBSession.activeSession.isOpen) {
-        NSArray *permissions = [NSArray arrayWithObjects:
-                                @"user_photos",
-                                @"friends_photos",
-                                nil];
-        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            if (!error) {
-                // session might now be open.
-                [self requestCurrentUser];
-            } else {
-                [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
-            }
-        }];
-    } else {
-        [self requestCurrentUser];
-    }
 }
 
 - (void) requestCurrentUser {
