@@ -62,6 +62,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self attemptFrictionlessLogin];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -94,6 +95,7 @@
 }
 
 - (void) requestCurrentUser {
+    [self showLoadingIndicator:YES];
     [[FBRequest requestForMe] startWithCompletionHandler:
      ^(FBRequestConnection *connection,
        NSDictionary<FBGraphUser> *user,
@@ -103,6 +105,7 @@
              friend = user;
              [self initPanel];
          }
+         [self showLoadingIndicator:NO];
      }];
 }
 
@@ -125,6 +128,21 @@
         [self showLoadingIndicator:YES];
         [self requestAlbums:friend.id];
         [self setTitleBar];
+    }
+}
+
+- (void)attemptFrictionlessLogin {
+    if (!FBSession.activeSession.isOpen) {
+        NSArray *permissions = [NSArray arrayWithObjects:
+                                @"user_photos",
+                                @"friends_photos",
+                                nil];
+        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            // session might now be open.
+            if (!error) {
+                [self requestCurrentUser];
+            }
+        }];
     }
 }
 

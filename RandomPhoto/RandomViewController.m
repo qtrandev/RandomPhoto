@@ -151,6 +151,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self attemptFrictionlessLogin];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -186,6 +187,22 @@
     if ([self checkLogin:YES]) {
         [self showLoadingIndicator:YES];
         [self requestFriends];
+    }
+}
+
+- (void)attemptFrictionlessLogin {
+    if (!FBSession.activeSession.isOpen) {
+        NSArray *permissions = [NSArray arrayWithObjects:
+                                @"user_photos",
+                                @"friends_photos",
+                                nil];
+        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            // session might now be open.
+            if (!error) {
+                [self showLoadingIndicator:YES];
+                [self requestFriends];
+            }
+        }];
     }
 }
 
