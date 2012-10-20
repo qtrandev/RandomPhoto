@@ -43,10 +43,6 @@
     [imageView setImage:(image)];
 }
 
-- (void)showLoadingIndicator:(BOOL)show {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -80,11 +76,6 @@
     [self setImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
@@ -129,19 +120,8 @@
     }
 }
 
-- (void)attemptFrictionlessLogin {
-    if (!FBSession.activeSession.isOpen) {
-        NSArray *permissions = [NSArray arrayWithObjects:
-                                @"user_photos",
-                                @"friends_photos",
-                                nil];
-        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            // session might now be open.
-            if (!error) {
-                [self requestCurrentUser];
-            }
-        }];
-    }
+- (void)afterFrictionlessLogin {
+    [self requestCurrentUser];
 }
 
 - (void)requestAlbums:(NSString *)friendId {

@@ -42,10 +42,6 @@
     }
 }
 
-- (void)showLoadingIndicator:(BOOL)show {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
-}
-
 - (void)resetZoom {
     [scrollView setZoomScale:1.0f];
 }
@@ -173,11 +169,6 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
-}
-
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     
     return imageView;
@@ -190,19 +181,8 @@
     }
 }
 
-- (void)attemptFrictionlessLogin {
-    if (!FBSession.activeSession.isOpen) {
-        NSArray *permissions = [NSArray arrayWithObjects:
-                                @"user_photos",
-                                @"friends_photos",
-                                nil];
-        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            // session might now be open.
-            if (!error) {
-                [self showLoadingIndicator:YES];
-                [self requestFriends];
-            }
-        }];
-    }
+- (void)afterFrictionlessLogin {
+    [self showLoadingIndicator:YES];
+    [self requestFriends];
 }
 @end

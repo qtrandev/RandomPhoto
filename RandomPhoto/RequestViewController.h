@@ -13,5 +13,8 @@
 @interface RequestViewController : UIViewController
 
 - (BOOL)checkLogin:(BOOL)displayLoginWindow;
+- (void)showLoadingIndicator:(BOOL)show;
+- (void)attemptFrictionlessLogin;
+- (void)afterFrictionlessLogin;
 
 @end

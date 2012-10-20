@@ -31,4 +31,32 @@
     [self.navigationController pushViewController:dvc animated:YES];
 }
 
+- (void)attemptFrictionlessLogin {
+    if (!FBSession.activeSession.isOpen) {
+        NSArray *permissions = [NSArray arrayWithObjects:
+                                @"user_photos",
+                                @"friends_photos",
+                                nil];
+        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+            // session might now be open.
+            if (!error) {
+                [self afterFrictionlessLogin];
+            }
+        }];
+    }
+}
+
+- (void)afterFrictionlessLogin {
+    
+}
+
+- (void)showLoadingIndicator:(BOOL)show {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
+}
+
 @end
