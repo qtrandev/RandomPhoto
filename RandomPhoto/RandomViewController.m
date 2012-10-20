@@ -7,8 +7,6 @@
 //
 
 #import "RandomViewController.h"
-#import "DetailViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
 
 @interface RandomViewController ()
 
@@ -206,21 +204,5 @@
             }
         }];
     }
-}
-
-- (BOOL)checkLogin:(BOOL)displayLoginWindow {
-    if (!FBSession.activeSession.isOpen) {
-        if (displayLoginWindow) {
-            [self displayLoginScreen];
-        }
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
-- (void)displayLoginScreen {
-    DetailViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
-    [self.navigationController pushViewController:dvc animated:YES];
 }
 @end

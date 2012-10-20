@@ -7,8 +7,6 @@
 //
 
 #import "FriendViewController.h"
-#import "DetailViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
 
 @interface FriendViewController () <
     FBFriendPickerDelegate> 
@@ -144,22 +142,6 @@
             }
         }];
     }
-}
-
-- (BOOL)checkLogin:(BOOL)displayLoginWindow {
-    if (!FBSession.activeSession.isOpen) {
-        if (displayLoginWindow) {
-            [self displayLoginScreen];
-        }
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
-- (void)displayLoginScreen {
-    DetailViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
-    [self.navigationController pushViewController:dvc animated:YES];
 }
 
 - (void)requestAlbums:(NSString *)friendId {
