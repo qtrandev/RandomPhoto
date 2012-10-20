@@ -47,7 +47,11 @@
 }
 
 - (void)afterFrictionlessLogin {
-    
+    // Implemented by subclasses
+}
+
+- (void)retry {
+    // Implemented by subclasses
 }
 
 - (void)showLoadingIndicator:(BOOL)show {

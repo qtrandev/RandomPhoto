@@ -16,5 +16,6 @@
 - (void)showLoadingIndicator:(BOOL)show;
 - (void)attemptFrictionlessLogin;
 - (void)afterFrictionlessLogin;
+- (void)retry;
 
 @end

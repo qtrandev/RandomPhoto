@@ -89,7 +89,7 @@
                  [self requestAlbumPhotos:[randomAlbum objectForKey:@"id"]];
              } else {
                  // Try again with a different friend
-                 [self requestFriends];
+                 [self retry];
              }
          }
          else {
@@ -122,7 +122,7 @@
                  
              } else {
                  // Try again with a different friend
-                 [self requestFriends];
+                 [self retry];
              }
          }
          else {
@@ -132,6 +132,10 @@
      }
      ];
     [connection start];
+}
+
+- (void)retry {
+    [self requestFriends];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
