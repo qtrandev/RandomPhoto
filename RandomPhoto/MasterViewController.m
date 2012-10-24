@@ -7,7 +7,7 @@
 //
 
 #import "MasterViewController.h"
-#import "DetailViewController.h"
+#import "LoginViewController.h"
 #import "RandomViewController.h"
 #import "FriendViewController.h"
 
@@ -37,7 +37,7 @@
 
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    self.detailViewController = (LoginViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     [self initMenu];
 }
 

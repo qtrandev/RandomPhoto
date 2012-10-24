@@ -27,7 +27,7 @@
 }
 
 - (void)displayLoginScreen {
-    DetailViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
+    LoginViewController* dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"dvc1"];
     [self.navigationController pushViewController:dvc animated:YES];
 }
 

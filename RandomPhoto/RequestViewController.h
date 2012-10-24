@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "DetailViewController.h"
+#import "LoginViewController.h"
 
 @interface RequestViewController : UIViewController
 
