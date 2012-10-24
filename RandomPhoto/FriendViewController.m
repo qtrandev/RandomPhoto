@@ -166,9 +166,10 @@
              NSLog(@"Found: %i photos in album", photos.count);
              if (photos.count > 0) {
                  FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
-                 NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
-                                         objectAtIndex:0]
-                                        objectForKey:@"source"];
+                 NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
+                 //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
+                 //                        objectAtIndex:0]
+                 //                       objectForKey:@"source"];
                  [self displayImageLink:photoLink];
                  [self showLoadingIndicator:NO];
                  
