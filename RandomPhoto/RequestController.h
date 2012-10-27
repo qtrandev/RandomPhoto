@@ -15,5 +15,6 @@
 - (void)frictionlesssLogin: (RequestCallback)callback;
 - (void)logout;
 - (BOOL)isSessionOpen;
+- (void)displayFriendPicker: (id)pickerDelegate navController:(UINavigationController*)navigationController;
 
 @end

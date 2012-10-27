@@ -58,6 +58,10 @@
     // Implemented by subclasses
 }
 
+- (void)displayFriendPicker {
+    [requestController displayFriendPicker:self navController:self.navigationController];
+}
+
 - (void)showLoadingIndicator:(BOOL)show {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
 }

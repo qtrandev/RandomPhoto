@@ -10,11 +10,13 @@
 
 @interface RequestController()
 @property (strong, nonatomic) FBRequester* requester;
+@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 @end
 
 @implementation RequestController
 
 @synthesize requester;
+@synthesize friendPickerController;
 
 - (id)init
 {
@@ -39,6 +41,21 @@
 
 - (BOOL)isSessionOpen {
     return [requester isSessionOpen];
+}
+
+
+- (void)displayFriendPicker: (id)pickerDelegate navController:(UINavigationController*)navigationController {
+    if (!friendPickerController) {
+        friendPickerController = [[FBFriendPickerViewController alloc] initWithNibName:nil bundle:nil];
+        
+        // Set the friend picker delegate
+        friendPickerController.delegate = pickerDelegate;
+        friendPickerController.title = @"Select friends";
+        friendPickerController.allowsMultipleSelection = NO;
+    }
+    
+    [friendPickerController loadData];
+    [navigationController pushViewController:self.friendPickerController animated:true];
 }
 
 @end

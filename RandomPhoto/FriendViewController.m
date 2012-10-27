@@ -10,7 +10,6 @@
 
 @interface FriendViewController () <
     FBFriendPickerDelegate> 
-@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 @property (strong, nonatomic) NSDictionary<FBGraphUser>* friend;
 
 @end
@@ -18,7 +17,6 @@
 @implementation FriendViewController
 @synthesize scrollView;
 @synthesize imageView;
-@synthesize friendPickerController = _friendPickerController;
 @synthesize friend;
 
 - (void)initPanel {
@@ -187,20 +185,6 @@
         [self setTitleBar];
         [self displayFriendPicker];
     }
-}
-
-- (void)displayFriendPicker {
-    if (!self.friendPickerController) {
-        self.friendPickerController = [[FBFriendPickerViewController alloc] initWithNibName:nil bundle:nil];
-        
-        // Set the friend picker delegate
-        self.friendPickerController.delegate = self;
-        self.friendPickerController.title = @"Select friends";
-        self.friendPickerController.allowsMultipleSelection = NO;
-    }
-    
-    [self.friendPickerController loadData];
-    [self.navigationController pushViewController:self.friendPickerController animated:true];
 }
 
 - (void)resetZoom {

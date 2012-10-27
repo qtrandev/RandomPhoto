@@ -19,5 +19,6 @@
 - (void)attemptFrictionlessLogin: (RequestCallback)callback;
 - (void)afterFrictionlessLogin;
 - (void)retry;
+- (void)displayFriendPicker;
 
 @end
