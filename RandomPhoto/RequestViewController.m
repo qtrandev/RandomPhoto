@@ -23,6 +23,9 @@
     if (!requestController) {
         requestController = [[RequestController alloc] init];
     }
+    [self attemptFrictionlessLogin: ^(void) {
+        [self afterFrictionlessLogin];
+    }];
 }
 
 - (BOOL)checkLogin:(BOOL)displayLoginWindow {
