@@ -25,8 +25,8 @@
     return self;
 }
 
-- (void)login {
-    [requester login];
+- (void)login: (RequestCallback)callback {
+    [requester login:callback];
 }
 
 - (void)frictionlesssLogin: (RequestCallback)callback {

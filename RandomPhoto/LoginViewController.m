@@ -63,15 +63,9 @@
     if ([self.requestController isSessionOpen]) {
         [self logout];
     } else {
-//        NSArray *permissions = [NSArray arrayWithObjects:
-//                                @"user_photos",
-//                                @"friends_photos",
-//                                nil];
-//        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-//            // session might now be open.
-//            [self initPanel];
-//        }];
-        [self.requestController login];
+        [self.requestController login:^(void) {
+            [self initPanel];
+        }];
     }
 }
 
@@ -113,6 +107,9 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self initPanel];
     [self configureView];
+    if (!self.requestController) {
+        self.requestController = [[RequestController alloc] init];
+    }
 }
 
 - (void)viewDidUnload

@@ -11,8 +11,16 @@
 @implementation FBRequester
 
 
-- (void)login {
-    
+- (void)login: (RequestCallback)callback {
+    NSArray *permissions = [NSArray arrayWithObjects:
+                            @"user_photos",
+                            @"friends_photos",
+                            nil];
+    [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        // session might now be open.
+        callback();
+    }];
+
 }
 
 - (void)logout {
@@ -21,7 +29,7 @@
     }
 }
 
-- (void)frictionlessLogin: (RequestCallback) callback {
+- (void)frictionlessLogin: (RequestCallback)callback {
     if (![self isSessionOpen]) {
         NSArray *permissions = [NSArray arrayWithObjects:
                                 @"user_photos",

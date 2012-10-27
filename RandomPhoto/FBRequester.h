@@ -13,9 +13,9 @@ typedef void(^RequestCallback) (void);
 
 @interface FBRequester : NSObject
 
-- (void)login;
+- (void)login: (RequestCallback)callback;
 - (void)logout;
-- (void)frictionlessLogin: (RequestCallback) callback;
+- (void)frictionlessLogin: (RequestCallback)callback;
 - (BOOL)isSessionOpen;
 
 @end

@@ -152,9 +152,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self attemptFrictionlessLogin: ^(void) {
-        [self afterFrictionlessLogin];
-    }];
+//    [self attemptFrictionlessLogin: ^(void) {
+//        [self afterFrictionlessLogin];
+//    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -11,7 +11,7 @@
 
 @interface RequestController : NSObject
 
-- (void)login;
+- (void)login: (RequestCallback)callback;
 - (void)frictionlesssLogin: (RequestCallback)callback;
 - (void)logout;
 - (BOOL)isSessionOpen;
