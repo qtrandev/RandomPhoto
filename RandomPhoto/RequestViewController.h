@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
+#import "FBRequester.h"
 
 @interface RequestViewController : UIViewController
 
 - (BOOL)checkLogin:(BOOL)displayLoginWindow;
 - (void)showLoadingIndicator:(BOOL)show;
-- (void)attemptFrictionlessLogin;
+- (void)attemptFrictionlessLogin: (RequestCallback)callback;
 - (void)afterFrictionlessLogin;
 - (void)retry;
 

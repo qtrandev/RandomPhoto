@@ -7,15 +7,18 @@
 //
 
 #import "LoginViewController.h"
+#import "RequestController.h"
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface LoginViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (strong, nonatomic) RequestController *requestController;
 - (void)configureView;
 @end
 
 @implementation LoginViewController
 
+@synthesize requestController = _requestController;
 @synthesize button = _button;
 @synthesize goButton = _goButton;
 @synthesize label = _label;
@@ -57,17 +60,18 @@
 
 /** Handles both login and logout */
 - (void)login:(id)sender {
-    if (FBSession.activeSession.isOpen) {
+    if ([self.requestController isSessionOpen]) {
         [self logout];
     } else {
-        NSArray *permissions = [NSArray arrayWithObjects:
-                                @"user_photos",
-                                @"friends_photos",
-                                nil];
-        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            // session might now be open.
-            [self initPanel];
-        }];
+//        NSArray *permissions = [NSArray arrayWithObjects:
+//                                @"user_photos",
+//                                @"friends_photos",
+//                                nil];
+//        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+//            // session might now be open.
+//            [self initPanel];
+//        }];
+        [self.requestController login];
     }
 }
 
@@ -76,10 +80,8 @@
 }
 
 - (void)logout{
-    if (FBSession.activeSession.isOpen) {
-        [FBSession.activeSession closeAndClearTokenInformation];
-        [self initPanel];
-    }
+    [self.requestController logout];
+    [self initPanel];
 }
 
 #pragma mark - Managing the detail item

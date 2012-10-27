@@ -7,13 +7,24 @@
 //
 
 #import "RequestViewController.h"
+#import "RequestController.h"
 
 @interface RequestViewController ()
+
+@property (strong, nonatomic) RequestController *requestController;
 
 @end
 
 @implementation RequestViewController
 
+@synthesize requestController;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    if (!requestController) {
+        requestController = [[RequestController alloc] init];
+    }
+}
 
 - (BOOL)checkLogin:(BOOL)displayLoginWindow {
     if (!FBSession.activeSession.isOpen) {
@@ -31,18 +42,9 @@
     [self.navigationController pushViewController:dvc animated:YES];
 }
 
-- (void)attemptFrictionlessLogin {
-    if (!FBSession.activeSession.isOpen) {
-        NSArray *permissions = [NSArray arrayWithObjects:
-                                @"user_photos",
-                                @"friends_photos",
-                                nil];
-        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-            // session might now be open.
-            if (!error) {
-                [self afterFrictionlessLogin];
-            }
-        }];
+- (void)attemptFrictionlessLogin: (RequestCallback)callback {
+    if (![requestController isSessionOpen]) {
+        [requestController frictionlesssLogin:callback];
     }
 }
 
