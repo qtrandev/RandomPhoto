@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
+#import "RequestController.h"
 
 @interface LoginViewController : UIViewController <UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *button;

@@ -7,8 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "RequestController.h"
-#import <FacebookSDK/FacebookSDK.h>
 
 @interface LoginViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;

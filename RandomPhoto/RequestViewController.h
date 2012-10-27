@@ -10,6 +10,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
 #import "FBRequester.h"
+#import "RequestController.h"
 
 @interface RequestViewController : UIViewController
 
