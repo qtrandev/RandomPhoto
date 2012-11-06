@@ -10,6 +10,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 typedef void(^RequestCallback) (void);
+typedef void(^ResultCallback) (id result);
+typedef void(^SuccessCallback) (void);
+typedef void(^FailureCallback) (void);
 
 @interface FBRequester : NSObject
 
@@ -17,5 +20,6 @@ typedef void(^RequestCallback) (void);
 - (void)logout;
 - (void)frictionlessLogin: (RequestCallback)callback;
 - (BOOL)isSessionOpen;
+- (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 
 @end

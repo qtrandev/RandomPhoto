@@ -20,5 +20,6 @@
 - (void)afterFrictionlessLogin;
 - (void)retry;
 - (void)displayFriendPicker;
+- (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 
 @end

@@ -116,69 +116,12 @@
 }
 
 - (void)requestAlbums:(NSString *)friendId {
-    FBRequestConnection *connection = [[FBRequestConnection alloc] init];
-    FBRequest *request = [FBRequest
-                          requestForGraphPath:
-                          [NSString stringWithFormat:@"%@?fields=albums.limit(0)",friendId]];
-    [connection addRequest:request completionHandler:
-     ^(FBRequestConnection *connection, id result, NSError *error) {
-         if (!error && result) {
-             id albumResult = [result objectForKey:@"albums"];
-             NSArray* albums = [albumResult objectForKey:@"data"];
-             NSLog(@"Found: %i albums", albums.count);
-             if (albums.count > 0) {
-                 FBGraphObject* randomAlbum = (FBGraphObject*) [albums objectAtIndex:arc4random()%albums.count];
-                 [self requestAlbumPhotos:[randomAlbum objectForKey:@"id"]];
-             } else {
-                 // Try again with a different friend
-                 self.navigationItem.title = @"No albums found";
-                 [self showLoadingIndicator:NO];
-             }
-         }
-         else {
-             NSLog(@"Albums error");
-             [self showLoadingIndicator:NO];
-         }
-     }
-     ];
-    [connection start];
-}
+    ResultCallback callback = ^(id result) {
+        [self displayImageLink:result];
+    };
+    [self requestRandomPhoto:callback userId:friendId];
 
-- (void)requestAlbumPhotos:(NSString *)albumId {
-    FBRequestConnection *connection = [[FBRequestConnection alloc] init];
-    FBRequest *request = [FBRequest
-                          requestForGraphPath:
-                          [NSString stringWithFormat:@"%@?fields=photos.limit(0)",albumId]];
-    [connection addRequest:request completionHandler:
-     ^(FBRequestConnection *connection, id result, NSError *error) {
-         if (!error && result) {
-             id photoResult = [result objectForKey:@"photos"];
-             NSArray* photos = [photoResult objectForKey:@"data"];
-             NSLog(@"Found: %i photos in album", photos.count);
-             if (photos.count > 0) {
-                 FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
-                 NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
-                 //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
-                 //                        objectAtIndex:0]
-                 //                       objectForKey:@"source"];
-                 [self displayImageLink:photoLink];
-                 [self showLoadingIndicator:NO];
-                 
-             } else {
-                 // Try again
-                 self.navigationItem.title = @"No photo found - retrying!";
-                 [self requestAlbums:friend.id];
-             }
-         }
-         else {
-             NSLog(@"Error getting album photos");
-             [self showLoadingIndicator:NO];
-         }
-     }
-     ];
-    [connection start];
 }
-
 
 - (IBAction)pickClicked:(id)sender {
     if ([self checkLogin:YES]) {

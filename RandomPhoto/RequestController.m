@@ -58,4 +58,8 @@
     [navigationController pushViewController:self.friendPickerController animated:true];
 }
 
+- (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
+    [requester requestRandomPhoto:callback userId:userId];
+}
+
 @end

@@ -16,5 +16,6 @@
 - (void)logout;
 - (BOOL)isSessionOpen;
 - (void)displayFriendPicker: (id)pickerDelegate navController:(UINavigationController*)navigationController;
+- (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 
 @end

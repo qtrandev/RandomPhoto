@@ -71,4 +71,8 @@
     return YES;
 }
 
+- (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
+    [requestController requestRandomPhoto:callback userId:userId];
+}
+
 @end
