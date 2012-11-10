@@ -18,7 +18,6 @@
 - (void)showLoadingIndicator:(BOOL)show;
 - (void)attemptFrictionlessLogin: (RequestCallback)callback;
 - (void)afterFrictionlessLogin;
-- (void)retry;
 - (void)displayFriendPicker;
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 - (void)requestCurrentUserInfo: (ResultCallback)callback;

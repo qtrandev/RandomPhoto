@@ -54,10 +54,6 @@
     // Implemented by subclasses
 }
 
-- (void)retry {
-    // Implemented by subclasses
-}
-
 - (void)displayFriendPicker {
     [requestController displayFriendPicker:self navController:self.navigationController];
 }

@@ -33,7 +33,16 @@
                  [self resetZoom];
                  [self displayProfileImage:friend1.id];
                  self.navigationItem.title = friend1.name;
-                 [self requestAlbums:friend1.id];
+                 ResultCallback callback = ^(id result) {
+                     [self showLoadingIndicator:NO];
+                     if (result != nil) {
+                         [self displayImageLink:result];
+                     } else {
+                         // Try another random friend
+                         [self requestFriends];
+                     }
+                 };
+                 [self requestRandomPhoto:callback userId:friend1.id];
              } else {
                  NSLog(@"Error sending request");
                  [self showLoadingIndicator:NO];
@@ -55,88 +64,6 @@
 - (void)displayImageLink:(NSString *)picLink {
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picLink]]];
     [imageView setImage:(image)];
-}
-
-- (void)requestRandomPhoto {
-    if (FBSession.activeSession.isOpen) {
-        [[FBRequest requestForMyFriends] startWithCompletionHandler:
-         ^(FBRequestConnection *connection,
-           NSDictionary *result,
-           NSError *error) {
-             if (!error) {
-                 NSArray* friends  = [result objectForKey:@"data"];
-                 NSDictionary<FBGraphUser>* randomFriend = (NSDictionary<FBGraphUser>*) [friends objectAtIndex:arc4random()%friends.count];
-                 
-                 [self requestAlbums:randomFriend.id];
-             }
-         }];
-    }
-}
-
-- (void)requestAlbums:(NSString *)friendId {
-    FBRequestConnection *connection = [[FBRequestConnection alloc] init];
-    FBRequest *request = [FBRequest
-                           requestForGraphPath:
-                           [NSString stringWithFormat:@"%@?fields=albums.limit(0)",friendId]];
-    [connection addRequest:request completionHandler:
-     ^(FBRequestConnection *connection, id result, NSError *error) {
-         if (!error && result) {
-             id albumResult = [result objectForKey:@"albums"];
-             NSArray* albums = [albumResult objectForKey:@"data"];
-             NSLog(@"Found: %i albums", albums.count);
-             if (albums.count > 0) {
-                 FBGraphObject* randomAlbum = (FBGraphObject*) [albums objectAtIndex:arc4random()%albums.count];
-                 [self requestAlbumPhotos:[randomAlbum objectForKey:@"id"]];
-             } else {
-                 // Try again with a different friend
-                 [self retry];
-             }
-         }
-         else {
-             NSLog(@"Albums error");
-             [self showLoadingIndicator:NO];
-         }
-     }
-     ];
-    [connection start];
-}
-
-- (void)requestAlbumPhotos:(NSString *)albumId {
-    FBRequestConnection *connection = [[FBRequestConnection alloc] init];
-    FBRequest *request = [FBRequest
-                          requestForGraphPath:
-                          [NSString stringWithFormat:@"%@?fields=photos.limit(0)",albumId]];
-    [connection addRequest:request completionHandler:
-     ^(FBRequestConnection *connection, id result, NSError *error) {
-         if (!error && result) {
-             id photoResult = [result objectForKey:@"photos"];
-             NSArray* photos = [photoResult objectForKey:@"data"];
-             NSLog(@"Found: %i photos in album", photos.count);
-             if (photos.count > 0) {
-                 FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
-                 NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
-                 //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
-                 //                       objectAtIndex:0]
-                 //                       objectForKey:@"source"];
-                 [self displayImageLink:photoLink];
-                 [self showLoadingIndicator:NO];
-                 
-             } else {
-                 // Try again with a different friend
-                 [self retry];
-             }
-         }
-         else {
-             NSLog(@"Error getting album photos");
-             [self showLoadingIndicator:NO];
-         }
-     }
-     ];
-    [connection start];
-}
-
-- (void)retry {
-    [self requestFriends];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
