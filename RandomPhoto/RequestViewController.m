@@ -47,6 +47,8 @@
 - (void)attemptFrictionlessLogin: (RequestCallback)callback {
     if (![requestController isSessionOpen]) {
         [requestController frictionlesssLogin:callback];
+    } else {
+        callback();
     }
 }
 

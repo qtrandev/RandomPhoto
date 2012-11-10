@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FBRequester.h"
+#import "DataHolder.h"
 
 @interface RequestController : NSObject
 

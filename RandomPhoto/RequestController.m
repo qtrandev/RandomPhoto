@@ -10,12 +10,14 @@
 
 @interface RequestController()
 @property (strong, nonatomic) FBRequester* requester;
+@property (strong, nonatomic) DataHolder* data;
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 @end
 
 @implementation RequestController
 
 @synthesize requester;
+@synthesize data;
 @synthesize friendPickerController;
 
 - (id)init
@@ -23,6 +25,7 @@
     self = [super init];
     if (self) {
         requester = [[FBRequester alloc] init];
+        data = [[DataHolder alloc] init];
     }
     return self;
 }
@@ -63,11 +66,33 @@
 }
 
 - (void)requestCurrentUserInfo: (ResultCallback)callback {
-    [requester requestCurrentUserInfo:callback];
+    if (data.currentUser != nil) {
+        callback(data.currentUser);
+    } else {
+        ResultCallback dataCallback = ^(id result) {
+            data.currentUser = result;
+            callback(result);
+        };
+        [requester requestCurrentUserInfo:dataCallback];
+    }
 }
 
 - (void)requestRandomFriend: (ResultCallback)callback {
-    [requester requestRandomFriend:callback];
+    if (data.friends != nil) {
+        NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [data.friends objectAtIndex:arc4random()%data.friends.count];
+        callback(friend1);
+    } else {
+        ResultCallback dataCallback = ^(id result) {
+            if (result != nil) {
+                data.friends = result;
+                NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [data.friends objectAtIndex:arc4random()%data.friends.count];
+                callback(friend1);
+            } else {
+                callback(nil);
+            }
+        };
+        [requester requestRandomFriend:dataCallback];
+    }
 }
 
 @end

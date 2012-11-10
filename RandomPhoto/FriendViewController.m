@@ -50,16 +50,16 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    if (friend == nil) {
-        if ([self checkLogin:NO]) {
-            [self requestCurrentUser];
-        } else {
-            [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
-        }
-    }
-}
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    if (friend == nil) {
+//        if ([self checkLogin:NO]) {
+//            [self requestCurrentUser];
+//        } else {
+//            [self displayImageLink:@"http://cdn1.iconfinder.com/data/icons/Social_store/256/FacebookShop.png"];
+//        }
+//    }
+//}
 
 - (void)viewDidUnload
 {
