@@ -21,5 +21,6 @@ typedef void(^FailureCallback) (void);
 - (void)frictionlessLogin: (RequestCallback)callback;
 - (BOOL)isSessionOpen;
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
+- (void)requestCurrentUserInfo: (ResultCallback)callback;
 
 @end

@@ -76,17 +76,12 @@
 
 - (void) requestCurrentUser {
     [self showLoadingIndicator:YES];
-    [[FBRequest requestForMe] startWithCompletionHandler:
-     ^(FBRequestConnection *connection,
-       NSDictionary<FBGraphUser> *user,
-       NSError *error) {
-         if (!error) {
-             [self showLoadingIndicator:NO];
-             friend = user;
-             [self initPanel];
-         }
-         [self showLoadingIndicator:NO];
-     }];
+    ResultCallback callback = ^(id result) {
+        [self showLoadingIndicator:NO];
+        friend = result;
+        [self initPanel];
+    };
+    [self requestCurrentUserInfo:callback];
 }
 
 - (void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker

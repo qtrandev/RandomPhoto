@@ -102,4 +102,15 @@
 
 }
 
+- (void)requestCurrentUserInfo: (ResultCallback)callback {
+    [[FBRequest requestForMe] startWithCompletionHandler:
+     ^(FBRequestConnection *connection,
+       NSDictionary<FBGraphUser> *user,
+       NSError *error) {
+         if (!error) {
+             callback(user);
+         }
+     }];
+}
+
 @end

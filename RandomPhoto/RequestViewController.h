@@ -21,5 +21,6 @@
 - (void)retry;
 - (void)displayFriendPicker;
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
+- (void)requestCurrentUserInfo: (ResultCallback)callback;
 
 @end

@@ -62,4 +62,8 @@
     [requester requestRandomPhoto:callback userId:userId];
 }
 
+- (void)requestCurrentUserInfo: (ResultCallback)callback {
+    [requester requestCurrentUserInfo:callback];
+}
+
 @end
