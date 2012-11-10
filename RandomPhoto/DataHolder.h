@@ -13,7 +13,13 @@
 
 @property (strong, nonatomic) NSDictionary<FBGraphUser>* currentUser;
 @property (strong, nonatomic) NSArray* friends;
+@property (strong, nonatomic) NSMutableDictionary *albumsMap;
+@property (strong, nonatomic) NSMutableDictionary *photosMap;
 
-- (NSDictionary<FBGraphUser>*)getCurrentUser;
+//- (NSDictionary<FBGraphUser>*)getUser;
+- (NSArray*)getAlbums: (NSString*)userId;
+- (void)setAlbums: (NSString*)userId albums:(NSArray*)albums;
+- (NSArray*)getPhotos: (NSString*)albumId;
+- (void)setPhotos: (NSString*)albumId photos:(NSArray*)photos;
 
 @end

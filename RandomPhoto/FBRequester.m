@@ -40,7 +40,7 @@
     return FBSession.activeSession.isOpen;
 }
 
-- (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
+- (void)requestAlbums: (ResultCallback)dataCallback userId:(NSString*)userId {
     FBRequestConnection *connection = [[FBRequestConnection alloc] init];
     FBRequest *request = [FBRequest
                           requestForGraphPath:
@@ -51,25 +51,18 @@
              id albumResult = [result objectForKey:@"albums"];
              NSArray* albums = [albumResult objectForKey:@"data"];
              NSLog(@"Found: %i albums", albums.count);
-             if (albums.count > 0) {
-                 FBGraphObject* randomAlbum = (FBGraphObject*) [albums objectAtIndex:arc4random()%albums.count];
-                 NSString* albumId = [randomAlbum objectForKey:@"id"];
-                 [self requestPhoto:callback albumId:albumId userId:userId];
-             } else {
-                 callback(nil);
-             }
+             dataCallback(albums);
          }
          else {
              NSLog(@"Albums error");
-             callback(nil);
+             dataCallback(nil);
          }
      }
      ];
     [connection start];
-
 }
 
-- (void)requestPhoto: (ResultCallback)callback albumId:(NSString*)albumId userId:(NSString*)userId {
+- (void)requestPhotos: (ResultCallback)dataCallback albumId:(NSString*)albumId {
     FBRequestConnection *connection2 = [[FBRequestConnection alloc] init];
     FBRequest *request2 = [FBRequest
                            requestForGraphPath:
@@ -80,24 +73,11 @@
              id photoResult = [result objectForKey:@"photos"];
              NSArray* photos = [photoResult objectForKey:@"data"];
              NSLog(@"Found: %i photos in album", photos.count);
-             if (photos.count > 0) {
-                 FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
-                 NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
-                 //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
-                 //                        objectAtIndex:0]
-                 //                       objectForKey:@"source"];
-                 callback(photoLink);
-                 
-             } else {
-                 // Try again
-                 //self.navigationItem.title = @"No photo found - retrying!";
-                 [self requestRandomPhoto:callback userId:userId];
-                 NSLog(@"Error: No album photos - retrying");
-             }
+             dataCallback(photos);
          }
          else {
              NSLog(@"Error getting album photos");
-             callback(nil);
+             dataCallback(nil);
          }
      }
      ];

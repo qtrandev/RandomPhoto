@@ -11,8 +11,6 @@
 
 typedef void(^RequestCallback) (void);
 typedef void(^ResultCallback) (id result);
-typedef void(^SuccessCallback) (void);
-typedef void(^FailureCallback) (void);
 
 @interface FBRequester : NSObject
 
@@ -20,8 +18,9 @@ typedef void(^FailureCallback) (void);
 - (void)logout;
 - (void)frictionlessLogin: (RequestCallback)callback;
 - (BOOL)isSessionOpen;
-- (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 - (void)requestCurrentUserInfo: (ResultCallback)dataCallback;
 - (void)requestRandomFriend: (ResultCallback)dataCallback;
+- (void)requestAlbums: (ResultCallback)dataCallback userId:(NSString*)userId;
+- (void)requestPhotos: (ResultCallback)dataCallback albumId:(NSString*)albumId;
 
 @end

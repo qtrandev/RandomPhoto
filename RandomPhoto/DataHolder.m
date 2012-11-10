@@ -16,8 +16,33 @@
 
 @synthesize currentUser;
 @synthesize friends;
+@synthesize albumsMap;
+@synthesize photosMap;
 
-- (NSDictionary<FBGraphUser>*)getCurrentUser {
-    return currentUser;
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        albumsMap = [[NSMutableDictionary alloc] init ];
+        photosMap = [[NSMutableDictionary alloc] init ];
+    }
+    return self;
 }
+
+- (NSArray*)getAlbums: (NSString*)userId {
+    return [albumsMap objectForKey:userId];
+}
+
+- (void)setAlbums: (NSString*)userId albums:(NSArray*)albums {
+    [albumsMap setObject:albums forKey:userId];
+}
+
+- (NSArray*)getPhotos: (NSString*)albumId {
+    return [photosMap objectForKey:albumId];
+}
+
+- (void)setPhotos: (NSString*)albumId photos:(NSArray*)photos {
+    [photosMap setObject:photos forKey:albumId];
+}
+
 @end

@@ -62,7 +62,80 @@
 }
 
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
-    [requester requestRandomPhoto:callback userId:userId];
+    NSArray* albums = [data getAlbums:userId];
+    if (albums != nil) {
+        if (albums.count > 0) {
+            [self handleAlbums:callback albums:albums userId:userId];
+        } else {
+            callback(nil);
+        }
+    } else {
+        ResultCallback dataCallback = ^(id result) {
+            if (result != nil) {
+                NSArray* myAlbums = result;
+                [data setAlbums:userId albums:myAlbums];
+                if (myAlbums.count > 0) {
+                    [self handleAlbums:callback albums:myAlbums userId:userId];
+                } else {
+                    callback(nil);
+                }
+            } else {
+                callback(nil);
+            }
+        };
+        [requester requestAlbums:dataCallback userId:userId];
+    }
+}
+
+- (void)handleAlbums: (ResultCallback)callback albums:(NSArray*)albums userId:(NSString*)userId {
+    FBGraphObject* randomAlbum = (FBGraphObject*) [albums objectAtIndex:arc4random()%albums.count];
+    NSString* albumId = [randomAlbum objectForKey:@"id"];
+    ResultCallback photoCallback = ^(id result) {
+        if (result != nil) {
+            callback(result); // photoLink
+        } else {
+            if (albums.count > 1) {
+                NSLog(@"Error: No album photos - retrying");
+                [self requestRandomPhoto:callback userId:userId];
+            } else {
+                callback(nil); // User has no photos
+            }
+        }
+    };
+    [self requestRandomPhoto2:photoCallback albumId:albumId];
+}
+
+- (void)requestRandomPhoto2: (ResultCallback)callback albumId:(NSString*)albumId {
+    NSArray* photos = [data.photosMap objectForKey:albumId];
+    if (photos != nil) {
+        if (photos.count > 0) {
+            [self handlePhotos:callback photos:photos];
+        } else {
+            callback(nil);
+        }
+    } else {
+        ResultCallback dataCallback = ^(id result) {
+            if (result != nil) {
+                NSArray* myPhotos = result;
+                [data setPhotos:albumId photos:myPhotos];
+                if (myPhotos.count > 0) {
+                    [self handlePhotos:callback photos:myPhotos];
+                } else {
+                    callback(nil);
+                }
+            }
+        };
+        [requester requestPhotos:dataCallback albumId:albumId];
+    }
+}
+
+- (void)handlePhotos: (ResultCallback)callback photos:(NSArray*)photos {
+    FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
+    NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
+    //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
+    //                        objectAtIndex:0]
+    //                       objectForKey:@"source"];
+    callback(photoLink);
 }
 
 - (void)requestCurrentUserInfo: (ResultCallback)callback {
