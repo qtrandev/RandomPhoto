@@ -54,52 +54,54 @@
              if (albums.count > 0) {
                  FBGraphObject* randomAlbum = (FBGraphObject*) [albums objectAtIndex:arc4random()%albums.count];
                  NSString* albumId = [randomAlbum objectForKey:@"id"];
-                 FBRequestConnection *connection2 = [[FBRequestConnection alloc] init];
-                 FBRequest *request2 = [FBRequest
-                                       requestForGraphPath:
-                                       [NSString stringWithFormat:@"%@?fields=photos.limit(0)",albumId]];
-                 [connection2 addRequest:request2 completionHandler:
-                  ^(FBRequestConnection *connection, id result, NSError *error) {
-                      if (!error && result) {
-                          id photoResult = [result objectForKey:@"photos"];
-                          NSArray* photos = [photoResult objectForKey:@"data"];
-                          NSLog(@"Found: %i photos in album", photos.count);
-                          if (photos.count > 0) {
-                              FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
-                              NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
-                              //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
-                              //                        objectAtIndex:0]
-                              //                       objectForKey:@"source"];
-                              callback(photoLink);
-                              
-                          } else {
-                              // Try again
-                              //self.navigationItem.title = @"No photo found - retrying!";
-                              //[self requestAlbums:friend.id];
-                              NSLog(@"Error: No album photos - not retrying");
-                          }
-                      }
-                      else {
-                          NSLog(@"Error getting album photos");
-                          //[self showLoadingIndicator:NO];
-                      }
-                  }
-                  ];
-                 [connection2 start];
+                 [self requestPhoto:callback albumId:albumId userId:userId];
              } else {
-                 // Try again with a different friend
-                 //self.navigationItem.title = @"No albums found";
-                 //[self showLoadingIndicator:NO];
+                 callback(nil);
              }
          }
          else {
              NSLog(@"Albums error");
-             //[self showLoadingIndicator:NO];
+             callback(nil);
          }
      }
      ];
     [connection start];
 
+}
+
+- (void)requestPhoto: (ResultCallback)callback albumId:(NSString*)albumId userId:(NSString*)userId {
+    FBRequestConnection *connection2 = [[FBRequestConnection alloc] init];
+    FBRequest *request2 = [FBRequest
+                           requestForGraphPath:
+                           [NSString stringWithFormat:@"%@?fields=photos.limit(0)",albumId]];
+    [connection2 addRequest:request2 completionHandler:
+     ^(FBRequestConnection *connection, id result, NSError *error) {
+         if (!error && result) {
+             id photoResult = [result objectForKey:@"photos"];
+             NSArray* photos = [photoResult objectForKey:@"data"];
+             NSLog(@"Found: %i photos in album", photos.count);
+             if (photos.count > 0) {
+                 FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
+                 NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
+                 //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
+                 //                        objectAtIndex:0]
+                 //                       objectForKey:@"source"];
+                 callback(photoLink);
+                 
+             } else {
+                 // Try again
+                 //self.navigationItem.title = @"No photo found - retrying!";
+                 [self requestRandomPhoto:callback userId:userId];
+                 NSLog(@"Error: No album photos - retrying");
+             }
+         }
+         else {
+             NSLog(@"Error getting album photos");
+             callback(nil);
+         }
+     }
+     ];
+    [connection2 start];
 }
 
 - (void)requestCurrentUserInfo: (ResultCallback)callback {

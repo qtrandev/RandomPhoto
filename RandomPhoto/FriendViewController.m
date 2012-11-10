@@ -111,8 +111,14 @@
 }
 
 - (void)requestAlbums:(NSString *)friendId {
+    [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
-        [self displayImageLink:result];
+        [self showLoadingIndicator:NO];
+        if (result != nil) {
+            [self displayImageLink:result];
+        } else {
+            self.navigationItem.title = @"No photos";
+        }
     };
     [self requestRandomPhoto:callback userId:friendId];
 
