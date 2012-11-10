@@ -66,4 +66,8 @@
     [requester requestCurrentUserInfo:callback];
 }
 
+- (void)requestRandomFriend: (ResultCallback)callback {
+    [requester requestRandomFriend:callback];
+}
+
 @end

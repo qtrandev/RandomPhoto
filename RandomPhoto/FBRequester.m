@@ -115,4 +115,26 @@
      }];
 }
 
+- (void)requestRandomFriend: (ResultCallback)callback {
+    if (FBSession.activeSession.isOpen) {
+        [[FBRequest requestForMyFriends] startWithCompletionHandler:
+         ^(FBRequestConnection *connection,
+           NSDictionary *result,
+           NSError *error) {
+             if (!error) {
+                 NSArray* friends  = [result objectForKey:@"data"];
+                 //NSLog(@"Found: %i friends", friends.count);
+                 //for (NSDictionary<FBGraphUser>* friend in friends) {
+                 //NSLog(@"%@ id %@", friend.name, friend.id);
+                 //}
+                 NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [friends objectAtIndex:arc4random()%friends.count];
+                 callback(friend1);
+             } else {
+                 NSLog(@"Error sending request");
+                 callback(nil);
+             }
+         }];
+    }
+}
+
 @end

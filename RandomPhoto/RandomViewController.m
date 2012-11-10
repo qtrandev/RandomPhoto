@@ -17,38 +17,29 @@
 @synthesize imageView;
 
 - (void)requestFriends {
-    if (FBSession.activeSession.isOpen) {
-        [[FBRequest requestForMyFriends] startWithCompletionHandler:
-         ^(FBRequestConnection *connection,
-           NSDictionary *result,
-           NSError *error) {
-             if (!error) {
-                 NSArray* friends  = [result objectForKey:@"data"];
-                 //NSLog(@"Found: %i friends", friends.count);
-                 //for (NSDictionary<FBGraphUser>* friend in friends) {
-                     //NSLog(@"%@ id %@", friend.name, friend.id);
-                 //}
-                 NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [friends objectAtIndex:arc4random()%friends.count];
-                 
-                 [self resetZoom];
-                 [self displayProfileImage:friend1.id];
-                 self.navigationItem.title = friend1.name;
-                 ResultCallback callback = ^(id result) {
-                     [self showLoadingIndicator:NO];
-                     if (result != nil) {
-                         [self displayImageLink:result];
-                     } else {
-                         // Try another random friend
-                         [self requestFriends];
-                     }
-                 };
-                 [self requestRandomPhoto:callback userId:friend1.id];
-             } else {
-                 NSLog(@"Error sending request");
-                 [self showLoadingIndicator:NO];
-             }
-         }];
-    }
+    ResultCallback friendsCallback = ^(id friendObj) {
+        [self showLoadingIndicator:NO];
+        if (friendObj != nil) {
+            NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*)friendObj;
+            [self resetZoom];
+            [self displayProfileImage:friend1.id];
+            self.navigationItem.title = friend1.name;
+            ResultCallback callback = ^(id result) {
+                [self showLoadingIndicator:NO];
+                if (result != nil) {
+                    [self displayImageLink:result];
+                } else {
+                    // Try another random friend
+                    [self requestFriends];
+                }
+            };
+            [self showLoadingIndicator:YES];
+            [self requestRandomPhoto:callback userId:friend1.id];
+        } else {
+            self.navigationItem.title = @"Cannot request friends";
+        }
+    };
+    [self requestRandomFriend:friendsCallback];
 }
 
 - (void)resetZoom {

@@ -22,5 +22,6 @@ typedef void(^FailureCallback) (void);
 - (BOOL)isSessionOpen;
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 - (void)requestCurrentUserInfo: (ResultCallback)callback;
+- (void)requestRandomFriend: (ResultCallback)callback;
 
 @end

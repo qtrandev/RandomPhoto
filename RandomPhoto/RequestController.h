@@ -18,5 +18,6 @@
 - (void)displayFriendPicker: (id)pickerDelegate navController:(UINavigationController*)navigationController;
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 - (void)requestCurrentUserInfo: (ResultCallback)callback;
+- (void)requestRandomFriend: (ResultCallback)callback;
 
 @end

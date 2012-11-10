@@ -75,4 +75,8 @@
     [requestController requestCurrentUserInfo:callback];
 }
 
+- (void)requestRandomFriend: (ResultCallback)callback {
+    [requestController requestRandomFriend:callback];
+}
+
 @end
