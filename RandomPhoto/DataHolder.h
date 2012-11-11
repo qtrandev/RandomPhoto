@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSArray* friends;
 @property (strong, nonatomic) NSMutableDictionary *albumsMap;
 @property (strong, nonatomic) NSMutableDictionary *photosMap;
+@property (strong, nonatomic) NSString* currentAlbum;
+@property int currentPhotoIndex;
 
 //- (NSDictionary<FBGraphUser>*)getUser;
 - (NSArray*)getAlbums: (NSString*)userId;

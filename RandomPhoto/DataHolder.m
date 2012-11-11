@@ -18,6 +18,8 @@
 @synthesize friends;
 @synthesize albumsMap;
 @synthesize photosMap;
+@synthesize currentAlbum;
+@synthesize currentPhotoIndex;
 
 - (id)init
 {

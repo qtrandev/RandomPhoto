@@ -81,4 +81,11 @@
     [requestController requestRandomFriend:callback];
 }
 
+- (void)getPreviousPhoto: (ResultCallback)callback {
+    [requestController getPreviousPhoto:callback];
+}
+
+- (void)getNextPhoto: (ResultCallback)callback {
+    [requestController getNextPhoto:callback];
+}
 @end

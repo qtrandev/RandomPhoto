@@ -12,8 +12,12 @@
     UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIButton *previousButton;
+@property (strong, nonatomic) IBOutlet UIButton *nextButton;
 
 - (IBAction)goClicked:(id)sender;
 - (IBAction)pickClicked:(id)sender;
+- (IBAction)previousClicked:(id)sender;
+- (IBAction)nextClicked:(id)sender;
 
 @end

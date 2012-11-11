@@ -20,5 +20,7 @@
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
 - (void)requestCurrentUserInfo: (ResultCallback)callback;
 - (void)requestRandomFriend: (ResultCallback)callback;
+- (void)getPreviousPhoto: (ResultCallback)callback;
+- (void)getNextPhoto: (ResultCallback)callback;
 
 @end

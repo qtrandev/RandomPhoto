@@ -17,13 +17,22 @@
 @implementation FriendViewController
 @synthesize scrollView;
 @synthesize imageView;
+@synthesize previousButton;
+@synthesize nextButton;
 @synthesize friend;
 
 - (void)initPanel {
     [self displayCurrentUser];
+    [self displayButtons:NO];
+}
+
+- (void)displayButtons: (BOOL)show {
+    previousButton.hidden = !show;
+    nextButton.hidden = !show;
 }
 
 - (void)displayCurrentUser {
+    [self displayButtons:NO];
     [self setTitleBar];
     [self showUserProfileImage];
 }
@@ -65,6 +74,8 @@
 {
     [self setScrollView:nil];
     [self setImageView:nil];
+    [self setNextButton:nil];
+    [self setPreviousButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -95,6 +106,7 @@
 }
 
 - (IBAction)goClicked:(id)sender {
+    [self displayButtons:NO];
     [self requestFriend];
 }
 
@@ -116,6 +128,7 @@
         [self showLoadingIndicator:NO];
         if (result != nil) {
             [self displayImageLink:result];
+            [self displayButtons:YES];
         } else {
             self.navigationItem.title = @"No photos";
         }
@@ -129,6 +142,36 @@
         [self setTitleBar];
         [self displayFriendPicker];
     }
+}
+
+- (IBAction)previousClicked:(id)sender {
+    [self displayButtons:NO];
+    [self showLoadingIndicator:YES];
+    ResultCallback callback = ^(id result) {
+        [self showLoadingIndicator:NO];
+        if (result != nil) {
+            [self displayImageLink:result];
+        } else {
+            self.navigationItem.title = @"Previous not found";
+        }
+        [self displayButtons:YES];
+    };
+    [self getPreviousPhoto:callback];
+}
+
+- (IBAction)nextClicked:(id)sender {
+    [self displayButtons:NO];
+    [self showLoadingIndicator:YES];
+    ResultCallback callback = ^(id result) {
+        [self showLoadingIndicator:NO];
+        if (result != nil) {
+            [self displayImageLink:result];
+        } else {
+            self.navigationItem.title = @"Next not found";
+        }
+        [self displayButtons:YES];
+    };
+    [self getNextPhoto:callback];
 }
 
 - (void)resetZoom {

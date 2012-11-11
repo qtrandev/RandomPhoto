@@ -119,6 +119,7 @@
                 NSArray* myPhotos = result;
                 [data setPhotos:albumId photos:myPhotos];
                 if (myPhotos.count > 0) {
+                    data.currentAlbum = albumId;
                     [self handlePhotos:callback photos:myPhotos];
                 } else {
                     callback(nil);
@@ -130,11 +131,13 @@
 }
 
 - (void)handlePhotos: (ResultCallback)callback photos:(NSArray*)photos {
-    FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:arc4random()%photos.count];
+    int randIndex = arc4random()%photos.count;
+    FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:randIndex];
     NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
     //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
     //                        objectAtIndex:0]
     //                       objectForKey:@"source"];
+    data.currentPhotoIndex = randIndex;
     callback(photoLink);
 }
 
@@ -165,6 +168,32 @@
             }
         };
         [requester requestRandomFriend:dataCallback];
+    }
+}
+
+- (void)getPreviousPhoto: (ResultCallback)callback {
+    [self getPhotoPosition:callback step:-1];
+}
+- (void)getNextPhoto: (ResultCallback)callback {
+    [self getPhotoPosition:callback step:1];
+}
+
+- (void)getPhotoPosition: (ResultCallback)callback step:(int)step {
+    NSArray* currentAlbumPhotos = [data.photosMap objectForKey:data.currentAlbum];
+    if (currentAlbumPhotos.count > 1) {
+        int newIndex = data.currentPhotoIndex+step;
+        if (newIndex < 0) {
+            newIndex = currentAlbumPhotos.count + newIndex;
+        }
+        if (newIndex >= currentAlbumPhotos.count) {
+            newIndex = newIndex - currentAlbumPhotos.count;
+        }
+        FBGraphObject* randomPhoto = (FBGraphObject*) [currentAlbumPhotos objectAtIndex:newIndex];
+        NSString* photoLink = [randomPhoto objectForKey:@"source"];
+        data.currentPhotoIndex = newIndex;
+        callback(photoLink);
+    } else {
+        callback(nil);
     }
 }
 
