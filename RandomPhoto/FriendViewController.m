@@ -26,6 +26,8 @@
 - (void)initPanel {
     [self displayCurrentUser];
     [self displayButtons:NO];
+    [likesLabel setText:@""];
+    [captionLabel setText:@""];
 }
 
 - (void)displayButtons: (BOOL)show {
@@ -130,7 +132,7 @@
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
         if (result != nil) {
-            [self displayImageLink:result];
+            [self displayPhotoResponse:result];
             [self displayButtons:YES];
         } else {
             self.navigationItem.title = @"No photos";
@@ -153,7 +155,7 @@
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
         if (result != nil) {
-            [self displayImageLink:result];
+            [self displayPhotoResponse:result];
         } else {
             self.navigationItem.title = @"Previous not found";
         }
@@ -168,7 +170,7 @@
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
         if (result != nil) {
-            [self displayImageLink:result];
+            [self displayPhotoResponse:result];
         } else {
             self.navigationItem.title = @"Next not found";
         }
@@ -176,6 +178,25 @@
     };
     [self getNextPhoto:callback];
     [self showLoadingIndicator:NO];
+}
+
+- (void)displayPhotoResponse: (id)result{
+    FBGraphObject* photo = result;
+    NSString* photoLink = [photo objectForKey:@"source"];
+    NSString* caption = [photo objectForKey:@"name"];
+    FBGraphObject* likes = [photo objectForKey:@"likes"];
+    [self displayImageLink:photoLink];
+    if (caption != nil) {
+        [captionLabel setText:caption];
+    } else {
+        [captionLabel setText:@""];
+    }
+    if (likes != nil) {
+        NSArray* likesList = [likes objectForKey:@"data"];
+        [likesLabel setText:[NSString stringWithFormat:@"Likes: %d",likesList.count]];
+    } else {
+        [likesLabel setText:@""];
+    }
 }
 
 - (void)resetZoom {

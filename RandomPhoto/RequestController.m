@@ -133,12 +133,12 @@
 - (void)handlePhotos: (ResultCallback)callback photos:(NSArray*)photos {
     int randIndex = arc4random()%photos.count;
     FBGraphObject* randomPhoto = (FBGraphObject*) [photos objectAtIndex:randIndex];
-    NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
+    //NSString* photoLink = [randomPhoto objectForKey:@"source"]; // lower res
     //NSString* photoLink = [[[randomPhoto objectForKey:@"images"]
     //                        objectAtIndex:0]
     //                       objectForKey:@"source"];
     data.currentPhotoIndex = randIndex;
-    callback(photoLink);
+    callback(randomPhoto);
 }
 
 - (void)requestCurrentUserInfo: (ResultCallback)callback {
@@ -189,9 +189,8 @@
             newIndex = newIndex - currentAlbumPhotos.count;
         }
         FBGraphObject* randomPhoto = (FBGraphObject*) [currentAlbumPhotos objectAtIndex:newIndex];
-        NSString* photoLink = [randomPhoto objectForKey:@"source"];
         data.currentPhotoIndex = newIndex;
-        callback(photoLink);
+        callback(randomPhoto);
     } else {
         callback(nil);
     }

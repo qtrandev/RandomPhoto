@@ -15,6 +15,8 @@
 @implementation RandomViewController
 @synthesize scrollView;
 @synthesize imageView;
+@synthesize captionLabel;
+@synthesize likesLabel;
 
 - (void)requestFriends {
     ResultCallback friendsCallback = ^(id friendObj) {
@@ -27,7 +29,7 @@
             ResultCallback callback = ^(id result) {
                 [self showLoadingIndicator:NO];
                 if (result != nil) {
-                    [self displayImageLink:result];
+                    [self displayPhotoResponse:result];
                 } else {
                     // Try another random friend
                     [self requestFriends];
@@ -40,6 +42,25 @@
         }
     };
     [self requestRandomFriend:friendsCallback];
+}
+
+- (void)displayPhotoResponse: (id)result{
+    FBGraphObject* photo = result;
+    NSString* photoLink = [photo objectForKey:@"source"];
+    NSString* caption = [photo objectForKey:@"name"];
+    FBGraphObject* likes = [photo objectForKey:@"likes"];
+    [self displayImageLink:photoLink];
+    if (caption != nil) {
+        [captionLabel setText:caption];
+    } else {
+        [captionLabel setText:@""];
+    }
+    if (likes != nil) {
+        NSArray* likesList = [likes objectForKey:@"data"];
+        [likesLabel setText:[NSString stringWithFormat:@"Likes: %d",likesList.count]];
+    } else {
+        [likesLabel setText:@""];
+    }
 }
 
 - (void)resetZoom {
@@ -81,6 +102,8 @@
 {
     [self setScrollView:nil];
     [self setImageView:nil];
+    [self setCaptionLabel:nil];
+    [self setLikesLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
