@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *likesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *commentsLabel;
 
 - (IBAction)goClicked:(id)sender;
 @end

@@ -21,6 +21,7 @@
 @synthesize nextButton;
 @synthesize likesLabel;
 @synthesize captionLabel;
+@synthesize commentsLabel;
 @synthesize friend;
 
 - (void)initPanel {
@@ -28,6 +29,7 @@
     [self displayButtons:NO];
     [likesLabel setText:@""];
     [captionLabel setText:@""];
+    [commentsLabel setText:@""];
 }
 
 - (void)displayButtons: (BOOL)show {
@@ -82,6 +84,7 @@
     [self setPreviousButton:nil];
     [self setLikesLabel:nil];
     [self setCaptionLabel:nil];
+    [self setCommentsLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -185,6 +188,7 @@
     NSString* photoLink = [photo objectForKey:@"source"];
     NSString* caption = [photo objectForKey:@"name"];
     FBGraphObject* likes = [photo objectForKey:@"likes"];
+    FBGraphObject* comments = [photo objectForKey:@"comments"];
     [self displayImageLink:photoLink];
     if (caption != nil) {
         [captionLabel setText:caption];
@@ -196,6 +200,12 @@
         [likesLabel setText:[NSString stringWithFormat:@"Likes: %d",likesList.count]];
     } else {
         [likesLabel setText:@""];
+    }
+    if (comments != nil) {
+        NSArray* commentsList = [comments objectForKey:@"data"];
+        [commentsLabel setText:[NSString stringWithFormat:@"Comments: %d",commentsList.count]];
+    } else {
+        [commentsLabel setText:@""];
     }
 }
 

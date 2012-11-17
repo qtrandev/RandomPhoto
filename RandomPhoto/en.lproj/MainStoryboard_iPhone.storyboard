@@ -168,6 +168,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="tb9-D9-7UI">
+                                <rect key="frame" x="221" y="81" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SyU-vP-r0J">
                                 <rect key="frame" x="239" y="9" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -234,6 +241,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="captionLabel" destination="HkP-Cy-KCZ" id="8Wa-tf-5ke"/>
+                        <outlet property="commentsLabel" destination="tb9-D9-7UI" id="4B0-Nd-MUd"/>
                         <outlet property="imageView" destination="gmm-fI-AdI" id="tva-wn-jhk"/>
                         <outlet property="likesLabel" destination="z2l-Iw-nCg" id="K1w-iM-22f"/>
                         <outlet property="nextButton" destination="BhL-GU-61u" id="wPj-xL-NDu"/>
@@ -281,6 +289,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="FcU-3v-toD">
+                                <rect key="frame" x="228" y="49" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FXN-lI-4pG">
                                 <rect key="frame" x="228" y="403" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -302,6 +317,7 @@
                     <navigationItem key="navigationItem" id="fBI-sa-YkV"/>
                     <connections>
                         <outlet property="captionLabel" destination="Mh1-8Q-5XY" id="jEd-Vs-M0i"/>
+                        <outlet property="commentsLabel" destination="FcU-3v-toD" id="Tj4-Rc-cru"/>
                         <outlet property="imageView" destination="BTz-YS-9Zx" id="KvV-jv-n5M"/>
                         <outlet property="likesLabel" destination="jBh-zQ-zSv" id="Bip-lA-We7"/>
                         <outlet property="scrollView" destination="5dL-4J-STk" id="e8b-6t-Kz3"/>
@@ -320,6 +336,7 @@
                 <relationship kind="action" name="pickClicked:"/>
                 <relationship kind="action" name="previousClicked:"/>
                 <relationship kind="outlet" name="captionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="commentsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="likesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
@@ -346,6 +363,7 @@
             <relationships>
                 <relationship kind="action" name="goClicked:"/>
                 <relationship kind="outlet" name="captionLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="commentsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="likesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
