@@ -45,9 +45,9 @@
 - (void)displayImageLink:(NSString *)picLink {
     [self showLoadingIndicator:YES];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picLink]]];
-    [self showLoadingIndicator:NO];
     [self resetZoom];
     [imageView setImage:(image)];
+    [self showLoadingIndicator:NO];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -125,13 +125,13 @@
 - (void)requestAlbums:(NSString *)friendId {
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
-        [self showLoadingIndicator:NO];
         if (result != nil) {
             [self displayImageLink:result];
             [self displayButtons:YES];
         } else {
             self.navigationItem.title = @"No photos";
         }
+        [self showLoadingIndicator:NO];
     };
     [self requestRandomPhoto:callback userId:friendId];
 
@@ -148,7 +148,6 @@
     [self displayButtons:NO];
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
-        [self showLoadingIndicator:NO];
         if (result != nil) {
             [self displayImageLink:result];
         } else {
@@ -157,13 +156,13 @@
         [self displayButtons:YES];
     };
     [self getPreviousPhoto:callback];
+    [self showLoadingIndicator:NO];
 }
 
 - (IBAction)nextClicked:(id)sender {
     [self displayButtons:NO];
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
-        [self showLoadingIndicator:NO];
         if (result != nil) {
             [self displayImageLink:result];
         } else {
@@ -172,6 +171,7 @@
         [self displayButtons:YES];
     };
     [self getNextPhoto:callback];
+    [self showLoadingIndicator:NO];
 }
 
 - (void)resetZoom {
