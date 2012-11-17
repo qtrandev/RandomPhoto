@@ -19,6 +19,8 @@
 @synthesize imageView;
 @synthesize previousButton;
 @synthesize nextButton;
+@synthesize likesLabel;
+@synthesize captionLabel;
 @synthesize friend;
 
 - (void)initPanel {
@@ -76,6 +78,8 @@
     [self setImageView:nil];
     [self setNextButton:nil];
     [self setPreviousButton:nil];
+    [self setLikesLabel:nil];
+    [self setCaptionLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

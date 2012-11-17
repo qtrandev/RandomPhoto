@@ -154,6 +154,20 @@
                                     <outlet property="delegate" destination="TDS-Ag-Zp5" id="u1p-74-nzT"/>
                                 </connections>
                             </scrollView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Caption" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="HkP-Cy-KCZ">
+                                <rect key="frame" x="20" y="9" width="210" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="z2l-Iw-nCg">
+                                <rect key="frame" x="239" y="56" width="72" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SyU-vP-r0J">
                                 <rect key="frame" x="239" y="9" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -219,7 +233,9 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="captionLabel" destination="HkP-Cy-KCZ" id="8Wa-tf-5ke"/>
                         <outlet property="imageView" destination="gmm-fI-AdI" id="tva-wn-jhk"/>
+                        <outlet property="likesLabel" destination="z2l-Iw-nCg" id="K1w-iM-22f"/>
                         <outlet property="nextButton" destination="BhL-GU-61u" id="wPj-xL-NDu"/>
                         <outlet property="previousButton" destination="0Do-YJ-NF9" id="gYq-Qg-Y6Y"/>
                         <outlet property="scrollView" destination="teV-cM-nig" id="Lr4-4M-3BX"/>
@@ -287,7 +303,9 @@
                 <relationship kind="action" name="nextClicked:"/>
                 <relationship kind="action" name="pickClicked:"/>
                 <relationship kind="action" name="previousClicked:"/>
+                <relationship kind="outlet" name="captionLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="likesLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nextButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="previousButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
