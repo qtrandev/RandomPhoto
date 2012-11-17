@@ -66,7 +66,7 @@
     FBRequestConnection *connection2 = [[FBRequestConnection alloc] init];
     FBRequest *request2 = [FBRequest
                            requestForGraphPath:
-                           [NSString stringWithFormat:@"%@?fields=photos.limit(0)",albumId]];
+                           [NSString stringWithFormat:@"%@?fields=photos.fields(images,likes,source,comments,name).limit(0)",albumId]];
     [connection2 addRequest:request2 completionHandler:
      ^(FBRequestConnection *connection, id result, NSError *error) {
          if (!error && result) {
