@@ -109,6 +109,7 @@
     NSArray* photos = [data.photosMap objectForKey:albumId];
     if (photos != nil) {
         if (photos.count > 0) {
+            data.currentAlbum = albumId;
             [self handlePhotos:callback photos:photos];
         } else {
             callback(nil);
@@ -124,6 +125,9 @@
                 } else {
                     callback(nil);
                 }
+            } else {
+                NSLog(@"Photo callback is nil");
+                callback(nil);
             }
         };
         [requester requestPhotos:dataCallback albumId:albumId];
