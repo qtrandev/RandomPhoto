@@ -18,6 +18,7 @@
 @synthesize captionLabel;
 @synthesize likesLabel;
 @synthesize commentsLabel;
+@synthesize currentFriend;
 
 - (void)requestFriends {
     ResultCallback friendsCallback = ^(id friendObj) {
@@ -27,6 +28,7 @@
             [self resetZoom];
             [self displayProfileImage:friend1.id];
             self.navigationItem.title = friend1.name;
+            self.currentFriend = friend1;
             ResultCallback callback = ^(id result) {
                 [self showLoadingIndicator:NO];
                 if (result != nil) {
@@ -127,6 +129,12 @@
         [self showLoadingIndicator:YES];
         [self requestFriends];
     }
+}
+
+- (IBAction)moreClicked:(id)sender {
+    FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
+    fvc.currentFriend = self.currentFriend;
+    [self.navigationController pushViewController:fvc animated:YES];
 }
 
 - (void)afterFrictionlessLogin {

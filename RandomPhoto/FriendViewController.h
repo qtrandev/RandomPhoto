@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *likesLabel;
 @property (strong, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *commentsLabel;
+@property (strong, nonatomic) NSDictionary<FBGraphUser>* currentFriend;
 
 - (IBAction)goClicked:(id)sender;
 - (IBAction)pickClicked:(id)sender;

@@ -10,7 +10,6 @@
 
 @interface FriendViewController () <
     FBFriendPickerDelegate> 
-@property (strong, nonatomic) NSDictionary<FBGraphUser>* friend;
 
 @end
 
@@ -22,7 +21,7 @@
 @synthesize likesLabel;
 @synthesize captionLabel;
 @synthesize commentsLabel;
-@synthesize friend;
+@synthesize currentFriend;
 
 - (void)initPanel {
     [self displayCurrentUser];
@@ -44,7 +43,7 @@
 }
 
 - (void)showUserProfileImage {
-    NSString *picLink = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", friend.id];
+    NSString *picLink = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large", currentFriend.id];
     [self displayImageLink:picLink];
 }
 
@@ -98,7 +97,7 @@
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
         [self showLoadingIndicator:NO];
-        friend = result;
+        currentFriend = result;
         [self initPanel];
     };
     [self requestCurrentUserInfo:callback];
@@ -107,7 +106,7 @@
 - (void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker
 {
     if (friendPicker.selection.count == 1) {
-        friend = [friendPicker.selection objectAtIndex:0];
+        currentFriend = [friendPicker.selection objectAtIndex:0];
         [self.navigationController popToViewController:self animated:YES];
         [self displayCurrentUser];
         [self requestFriend];
@@ -122,13 +121,17 @@
 - (void)requestFriend {
     if ([self checkLogin:YES]) {
         [self showLoadingIndicator:YES];
-        [self requestAlbums:friend.id];
+        [self requestAlbums:currentFriend.id];
         [self setTitleBar];
     }
 }
 
 - (void)afterFrictionlessLogin {
-    [self requestCurrentUser];
+    if (currentFriend == nil) {
+        [self requestCurrentUser];
+    } else {
+        [self goClicked:nil];
+    }
 }
 
 - (void)requestAlbums:(NSString *)friendId {
@@ -214,7 +217,7 @@
 }
 
 - (void)setTitleBar {
-    self.navigationItem.title = friend.first_name;
+    self.navigationItem.title = currentFriend.first_name;
 }
 
 @end
