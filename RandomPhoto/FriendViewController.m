@@ -64,6 +64,16 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Add the Pick button to navigation bar
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithTitle:@"Pick"
+                                              style:UIBarButtonItemStyleBordered
+                                              target:self
+                                              action:@selector(pickClicked:)];
+}
+
 //- (void)viewDidAppear:(BOOL)animated {
 //    [super viewDidAppear:animated];
 //    if (friend == nil) {
