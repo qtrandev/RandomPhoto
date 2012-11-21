@@ -24,27 +24,30 @@
     ResultCallback friendsCallback = ^(id friendObj) {
         [self showLoadingIndicator:NO];
         if (friendObj != nil) {
-            NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*)friendObj;
-            [self resetZoom];
-            [self displayProfileImage:friend1.id];
-            self.navigationItem.title = friend1.name;
-            self.currentFriend = friend1;
-            ResultCallback callback = ^(id result) {
-                [self showLoadingIndicator:NO];
-                if (result != nil) {
-                    [self displayPhotoResponse:result];
-                } else {
-                    // Try another random friend
-                    [self requestFriends];
-                }
-            };
-            [self showLoadingIndicator:YES];
-            [self requestRandomPhoto:callback userId:friend1.id];
+            [self requestForFriend:friendObj];
         } else {
             self.navigationItem.title = @"Cannot request friends";
         }
     };
     [self requestRandomFriend:friendsCallback];
+}
+
+- (void)requestForFriend: (NSDictionary<FBGraphUser>*)friend1 {
+    [self resetZoom];
+    [self displayProfileImage:friend1.id];
+    self.navigationItem.title = friend1.name;
+    self.currentFriend = friend1;
+    ResultCallback callback = ^(id result) {
+        [self showLoadingIndicator:NO];
+        if (result != nil) {
+            [self displayPhotoResponse:result];
+        } else {
+            // Try another random friend
+            [self requestFriends];
+        }
+    };
+    [self showLoadingIndicator:YES];
+    [self requestRandomPhoto:callback userId:friend1.id];
 }
 
 - (void)displayPhotoResponse: (id)result{
@@ -97,6 +100,16 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Add the Pick button to navigation bar
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithTitle:@"Pick"
+                                              style:UIBarButtonItemStyleBordered
+                                              target:self
+                                              action:@selector(pickClicked:)];
+}
+
 //- (void)viewDidAppear:(BOOL)animated
 //{
 //    [super viewDidAppear:animated];
@@ -122,6 +135,21 @@
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     
     return imageView;
+}
+
+- (void)friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker
+{
+    if (friendPicker.selection.count == 1) {
+        currentFriend = [friendPicker.selection objectAtIndex:0];
+        [self.navigationController popToViewController:self animated:YES];
+        [self requestForFriend:currentFriend];
+    }
+}
+
+- (void)pickClicked:(id)sender {
+    if ([self checkLogin:YES]) {
+        [self displayFriendPicker];
+    }
 }
 
 - (IBAction)goClicked:(id)sender {

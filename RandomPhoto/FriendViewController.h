@@ -20,7 +20,7 @@
 @property (strong, nonatomic) NSDictionary<FBGraphUser>* currentFriend;
 
 - (IBAction)goClicked:(id)sender;
-- (IBAction)pickClicked:(id)sender;
+- (void)pickClicked:(id)sender;
 - (IBAction)previousClicked:(id)sender;
 - (IBAction)nextClicked:(id)sender;
 

@@ -159,7 +159,7 @@
 
 }
 
-- (IBAction)pickClicked:(id)sender {
+- (void)pickClicked:(id)sender {
     if ([self checkLogin:YES]) {
         [self setTitleBar];
         [self displayFriendPicker];

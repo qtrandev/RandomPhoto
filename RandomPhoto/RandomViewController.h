@@ -10,7 +10,8 @@
 #import "FriendViewController.h"
 
 @interface RandomViewController : RequestViewController <
-    UIScrollViewDelegate>
+    UIScrollViewDelegate,
+    FBFriendPickerDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UILabel *captionLabel;
