@@ -58,7 +58,9 @@
     FBGraphObject* comments = [photo objectForKey:@"comments"];
     [self displayImageLink:photoLink];
     if (caption != nil) {
+        captionLabel.frame = CGRectMake(10,10,300,100); // Not good when screen size changes.
         [captionLabel setText:caption];
+        [captionLabel sizeToFit];
     } else {
         [captionLabel setText:@""];
     }
