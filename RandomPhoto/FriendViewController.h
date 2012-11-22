@@ -7,9 +7,11 @@
 //
 
 #import "RequestViewController.h"
+#import "FlipsideViewController.h"
 
 @interface FriendViewController : RequestViewController <
-    UIScrollViewDelegate>
+    UIScrollViewDelegate,
+    FlipsideViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIButton *previousButton;

@@ -239,4 +239,18 @@
     [commentsLabel setText:@""];
 }
 
+#pragma mark - Flipside View
+
+- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
+        [[segue destinationViewController] setDelegate:self];
+    }
+}
+
 @end
