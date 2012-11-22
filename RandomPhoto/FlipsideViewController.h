@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @class FlipsideViewController;
 
@@ -14,10 +15,13 @@
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller;
 @end
 
-@interface FlipsideViewController : UIViewController
+@interface FlipsideViewController : UIViewController <
+    UITableViewDataSource>
 
 @property (weak, nonatomic) id <FlipsideViewControllerDelegate> delegate;
+@property (strong, nonatomic) NSArray* savedComments;
 
 - (IBAction)done:(id)sender;
+- (void)setTitleName:(NSString*)title;
 
 @end

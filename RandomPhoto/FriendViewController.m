@@ -22,6 +22,7 @@
 @synthesize captionLabel;
 @synthesize commentsLabel;
 @synthesize currentFriend;
+@synthesize savedComments;
 
 - (void)initPanel {
     [self displayCurrentUser];
@@ -220,8 +221,10 @@
     if (comments != nil) {
         NSArray* commentsList = [comments objectForKey:@"data"];
         [commentsLabel setText:[NSString stringWithFormat:@"Comments: %d",commentsList.count]];
+        savedComments = commentsList;
     } else {
         [commentsLabel setText:@""];
+        savedComments = nil;
     }
 }
 
@@ -249,7 +252,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showAlternate"]) {
-        [[segue destinationViewController] setDelegate:self];
+        FlipsideViewController *fvc = [segue destinationViewController];
+        [fvc setDelegate:self];
+        //[fvc setTitleName:@"Comments"];
+        fvc.savedComments = savedComments;
     }
 }
 
