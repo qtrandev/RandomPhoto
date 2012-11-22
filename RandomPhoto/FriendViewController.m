@@ -26,9 +26,7 @@
 - (void)initPanel {
     [self displayCurrentUser];
     [self displayButtons:NO];
-    [likesLabel setText:@""];
-    [captionLabel setText:@""];
-    [commentsLabel setText:@""];
+    [self clearTextLabels];
 }
 
 - (void)displayButtons: (BOOL)show {
@@ -37,6 +35,7 @@
 }
 
 - (void)displayCurrentUser {
+    [self clearTextLabels];
     [self displayButtons:NO];
     [self setTitleBar];
     [self showUserProfileImage];
@@ -66,6 +65,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self clearTextLabels];
     // Add the Pick button to navigation bar
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithTitle:@"Pick"
@@ -148,6 +148,7 @@
     [self showLoadingIndicator:YES];
     ResultCallback callback = ^(id result) {
         if (result != nil) {
+            [self clearTextLabels];
             [self displayPhotoResponse:result];
             [self displayButtons:YES];
         } else {
@@ -230,6 +231,12 @@
 
 - (void)setTitleBar {
     self.navigationItem.title = currentFriend.first_name;
+}
+
+- (void)clearTextLabels {
+    [likesLabel setText:@""];
+    [captionLabel setText:@""];
+    [commentsLabel setText:@""];
 }
 
 @end

@@ -34,6 +34,7 @@
 
 - (void)requestForFriend: (NSDictionary<FBGraphUser>*)friend1 {
     [self resetZoom];
+    [self clearTextLabels];
     [self displayProfileImage:friend1.id];
     self.navigationItem.title = friend1.name;
     self.currentFriend = friend1;
@@ -104,6 +105,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self clearTextLabels];
     // Add the Pick button to navigation bar
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithTitle:@"Pick"
@@ -170,5 +172,11 @@
 - (void)afterFrictionlessLogin {
     [self showLoadingIndicator:YES];
     [self requestFriends];
+}
+
+- (void)clearTextLabels {
+    [likesLabel setText:@""];
+    [captionLabel setText:@""];
+    [commentsLabel setText:@""];
 }
 @end
