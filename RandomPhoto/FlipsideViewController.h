@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) id <FlipsideViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSArray* savedComments;
+@property (strong, nonatomic) NSArray* savedLikes;
 
 - (IBAction)done:(id)sender;
 - (void)setTitleName:(NSString*)title;

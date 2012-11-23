@@ -23,6 +23,7 @@
 @synthesize commentsLabel;
 @synthesize currentFriend;
 @synthesize savedComments;
+@synthesize savedLikes;
 
 - (void)initPanel {
     [self displayCurrentUser];
@@ -215,8 +216,10 @@
     if (likes != nil) {
         NSArray* likesList = [likes objectForKey:@"data"];
         [likesLabel setText:[NSString stringWithFormat:@"Likes: %d",likesList.count]];
+        savedLikes = likesList;
     } else {
         [likesLabel setText:@""];
+        savedLikes = nil;
     }
     if (comments != nil) {
         NSArray* commentsList = [comments objectForKey:@"data"];
@@ -256,6 +259,7 @@
         [fvc setDelegate:self];
         //[fvc setTitleName:@"Comments"];
         fvc.savedComments = savedComments;
+        fvc.savedLikes = savedLikes;
     }
 }
 

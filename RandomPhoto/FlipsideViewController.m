@@ -16,6 +16,7 @@
 
 @synthesize delegate = _delegate;
 @synthesize savedComments;
+@synthesize savedLikes;
 
 - (void)viewDidLoad
 {
@@ -38,31 +39,57 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Likes";
+    } else {
+        return @"Comments";
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (savedComments != nil) {
-        return savedComments.count; 
+    if (section == 0) {
+        if (savedLikes != nil) {
+            return savedLikes.count; 
+        } else {
+            return 0;
+        }
     } else {
-        return 0;
+        if (savedComments != nil) {
+            return savedComments.count; 
+        } else {
+            return 0;
+        }
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    if (indexPath.section == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LikeCell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LikeCell"];
+        }
+        FBGraphObject *like = [savedLikes objectAtIndex:indexPath.row];
+        cell.textLabel.text = [like objectForKey:@"name"];
+        return cell;
+    } else {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CommentCell"];
+        }
+        
+        FBGraphObject *comment = [savedComments objectAtIndex:indexPath.row];
+        NSString* message = [comment objectForKey:@"message"];
+        cell.detailTextLabel.text = message;
+        FBGraphObject *from = [comment objectForKey:@"from"];
+        cell.textLabel.text = [from objectForKey:@"name"];
+        return cell;
     }
-    
-    FBGraphObject *comment = [savedComments objectAtIndex:indexPath.row];
-    NSString* message = [comment objectForKey:@"message"];
-    cell.detailTextLabel.text = message;
-    FBGraphObject *from = [comment objectForKey:@"from"];
-    cell.textLabel.text = [from objectForKey:@"name"];
-    return cell;
 }
 
 

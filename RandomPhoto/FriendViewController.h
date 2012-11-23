@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *commentsLabel;
 @property (strong, nonatomic) NSDictionary<FBGraphUser>* currentFriend;
 @property (strong, nonatomic) NSArray* savedComments;
+@property (strong, nonatomic) NSArray* savedLikes;
 
 - (IBAction)goClicked:(id)sender;
 - (void)pickClicked:(id)sender;
