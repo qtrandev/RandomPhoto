@@ -21,6 +21,7 @@
 @synthesize likesLabel;
 @synthesize captionLabel;
 @synthesize commentsLabel;
+@synthesize countLabel;
 @synthesize currentFriend;
 @synthesize savedComments;
 @synthesize savedLikes;
@@ -96,6 +97,7 @@
     [self setLikesLabel:nil];
     [self setCaptionLabel:nil];
     [self setCommentsLabel:nil];
+    [self setCountLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -229,6 +231,9 @@
         [commentsLabel setText:@""];
         savedComments = nil;
     }
+    [countLabel setText:[NSString stringWithFormat:@"[%d/%d]",
+                         [self getCurrentPhotoIndex]+1,
+                         [self getCurrentPhotoCount]]];
 }
 
 - (void)resetZoom {
@@ -243,6 +248,7 @@
     [likesLabel setText:@""];
     [captionLabel setText:@""];
     [commentsLabel setText:@""];
+    [countLabel setText:@""];
 }
 
 #pragma mark - Flipside View

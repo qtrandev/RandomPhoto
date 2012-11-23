@@ -88,4 +88,11 @@
 - (void)getNextPhoto: (ResultCallback)callback {
     [requestController getNextPhoto:callback];
 }
+
+- (int)getCurrentPhotoIndex {
+    return [requestController getCurrentPhotoIndex];
+}
+- (int)getCurrentPhotoCount {
+    return [requestController getCurrentPhotoCount];
+}
 @end

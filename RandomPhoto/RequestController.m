@@ -200,4 +200,12 @@
     }
 }
 
+- (int)getCurrentPhotoIndex {
+    return data.currentPhotoIndex;
+}
+- (int)getCurrentPhotoCount {
+    NSArray* currentAlbumPhotos = [data.photosMap objectForKey:data.currentAlbum];
+    return currentAlbumPhotos.count;
+}
+
 @end
