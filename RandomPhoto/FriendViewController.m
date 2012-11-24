@@ -144,7 +144,7 @@
     if (currentFriend == nil) {
         [self requestCurrentUser];
     } else {
-        [self goClicked:nil];
+        //[self goClicked:nil];
     }
 }
 
@@ -162,6 +162,21 @@
     };
     [self requestRandomPhoto:callback userId:friendId];
 
+}
+
+- (void)requestTaggedPhotos {
+    [self showLoadingIndicator:YES];
+    ResultCallback callback = ^(id result) {
+        if (result != nil) {
+            [self clearTextLabels];
+            [self displayPhotoResponse:result];
+            [self displayButtons:YES];
+        } else {
+            self.navigationItem.title = @"No photos";
+        }
+        [self showLoadingIndicator:NO];
+    };
+    [self requestTaggedPhotos:callback userId:currentFriend.id];
 }
 
 - (void)pickClicked:(id)sender {

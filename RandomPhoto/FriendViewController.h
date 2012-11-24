@@ -28,5 +28,6 @@
 - (void)pickClicked:(id)sender;
 - (IBAction)previousClicked:(id)sender;
 - (IBAction)nextClicked:(id)sender;
+- (void)requestTaggedPhotos;
 
 @end

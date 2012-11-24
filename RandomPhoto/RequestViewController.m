@@ -73,6 +73,10 @@
     [requestController requestRandomPhoto:callback userId:userId];
 }
 
+- (void)requestTaggedPhotos: (ResultCallback)callback userId:(NSString*)userId {
+    [requestController requestTaggedPhotos:callback userId:userId];
+}
+
 - (void)requestCurrentUserInfo: (ResultCallback)callback {
     [requestController requestCurrentUserInfo:callback];
 }

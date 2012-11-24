@@ -84,6 +84,28 @@
     [connection2 start];
 }
 
+- (void)requestTaggedPhotos: (ResultCallback)dataCallback userId:(NSString*)userId {
+    FBRequestConnection *connection = [[FBRequestConnection alloc] init];
+    FBRequest *request = [FBRequest
+                           requestForGraphPath:
+                           [NSString stringWithFormat:@"%@?fields=photos.fields(images,likes,source,comments,name).limit(0)",userId]];
+    [connection addRequest:request completionHandler:
+     ^(FBRequestConnection *connection, id result, NSError *error) {
+         if (!error && result) {
+             id photoResult = [result objectForKey:@"photos"];
+             NSArray* photos = [photoResult objectForKey:@"data"];
+             NSLog(@"Found: %i photos in tagged", photos.count);
+             dataCallback(photos);
+         }
+         else {
+             NSLog(@"Error getting tagged photos");
+             dataCallback(nil);
+         }
+     }
+     ];
+    [connection start];
+}
+
 - (void)requestCurrentUserInfo: (ResultCallback)dataCallback {
     [[FBRequest requestForMe] startWithCompletionHandler:
      ^(FBRequestConnection *connection,

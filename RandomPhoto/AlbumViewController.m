@@ -13,12 +13,13 @@
 @synthesize currentFriend;
 
 - (IBAction)tagClicked:(id)sender {
-    
-}
-
-- (IBAction)albumClicked:(id)sender {
     FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
+    [fvc requestTaggedPhotos];
+}
+
+- (IBAction)albumClicked:(id)sender {
+
 }
 @end

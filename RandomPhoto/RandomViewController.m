@@ -167,6 +167,7 @@
     FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
+    [fvc goClicked:nil];
 }
 
 - (IBAction)albumsClicked:(id)sender {

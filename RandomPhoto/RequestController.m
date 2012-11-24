@@ -61,6 +61,25 @@
     [navigationController pushViewController:self.friendPickerController animated:true];
 }
 
+- (void)requestTaggedPhotos: (ResultCallback)callback userId:(NSString*)userId {
+    ResultCallback photoCallback = ^(id result) {
+        if (result != nil) {
+            NSArray* myPhotos = result;
+            [data setPhotos:userId photos:myPhotos];
+            if (myPhotos.count > 0) {
+                data.currentAlbum = userId;
+                [self handlePhotos:callback photos:myPhotos];
+            } else {
+                callback(nil);
+            }
+        } else {
+            NSLog(@"Error: No tagged photos");
+            callback(nil);
+        }
+    };
+    [requester requestTaggedPhotos:photoCallback userId:userId];
+}
+
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
     NSArray* albums = [data getAlbums:userId];
     if (albums != nil) {

@@ -20,6 +20,7 @@
 - (void)afterFrictionlessLogin;
 - (void)displayFriendPicker;
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId;
+- (void)requestTaggedPhotos: (ResultCallback)callback userId:(NSString*)userId;
 - (void)requestCurrentUserInfo: (ResultCallback)callback;
 - (void)requestRandomFriend: (ResultCallback)callback;
 - (void)getPreviousPhoto: (ResultCallback)callback;
