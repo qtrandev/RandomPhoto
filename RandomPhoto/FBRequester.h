@@ -22,6 +22,5 @@ typedef void(^ResultCallback) (id result);
 - (void)requestRandomFriend: (ResultCallback)dataCallback;
 - (void)requestAlbums: (ResultCallback)dataCallback userId:(NSString*)userId;
 - (void)requestPhotos: (ResultCallback)dataCallback albumId:(NSString*)albumId;
-- (void)requestTaggedPhotos: (ResultCallback)dataCallback userId:(NSString*)userId;
 
 @end

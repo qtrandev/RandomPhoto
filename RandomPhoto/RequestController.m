@@ -62,22 +62,7 @@
 }
 
 - (void)requestTaggedPhotos: (ResultCallback)callback userId:(NSString*)userId {
-    ResultCallback photoCallback = ^(id result) {
-        if (result != nil) {
-            NSArray* myPhotos = result;
-            [data setPhotos:userId photos:myPhotos];
-            if (myPhotos.count > 0) {
-                data.currentAlbum = userId;
-                [self handlePhotos:callback photos:myPhotos];
-            } else {
-                callback(nil);
-            }
-        } else {
-            NSLog(@"Error: No tagged photos");
-            callback(nil);
-        }
-    };
-    [requester requestTaggedPhotos:photoCallback userId:userId];
+    [self requestRandomPhoto2:callback albumId:userId];
 }
 
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
