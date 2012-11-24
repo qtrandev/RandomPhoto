@@ -12,6 +12,7 @@
 @interface AlbumViewController : RequestViewController
 
 @property (strong, nonatomic) NSDictionary<FBGraphUser>* currentFriend;
+@property (strong, nonatomic) NSString* currentAlbum;
 
 - (IBAction)tagClicked:(id)sender;
 - (IBAction)albumClicked:(id)sender;

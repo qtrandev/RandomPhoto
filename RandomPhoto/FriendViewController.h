@@ -29,5 +29,6 @@
 - (IBAction)previousClicked:(id)sender;
 - (IBAction)nextClicked:(id)sender;
 - (void)requestTaggedPhotos;
+- (void)requestAlbum:(NSString*)albumId userId:(NSString*)userId;
 
 @end

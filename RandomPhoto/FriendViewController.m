@@ -179,6 +179,21 @@
     [self requestTaggedPhotos:callback userId:currentFriend.id];
 }
 
+- (void)requestAlbum:(NSString*)albumId userId:(NSString*)userId {
+    [self showLoadingIndicator:YES];
+    ResultCallback callback = ^(id result) {
+        if (result != nil) {
+            [self clearTextLabels];
+            [self displayPhotoResponse:result];
+            [self displayButtons:YES];
+        } else {
+            self.navigationItem.title = @"No photos";
+        }
+        [self showLoadingIndicator:NO];
+    };
+    [super requestAlbum:callback albumId:albumId userId:userId];
+}
+
 - (void)pickClicked:(id)sender {
     if ([self checkLogin:YES]) {
         [self setTitleBar];

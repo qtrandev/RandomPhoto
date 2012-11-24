@@ -77,6 +77,10 @@
     [requestController requestTaggedPhotos:callback userId:userId];
 }
 
+- (void)requestAlbum:(ResultCallback)callback albumId:(NSString*)albumId userId:(NSString*)userId {
+    [requestController requestAlbum:callback albumId:albumId userId:userId];
+}
+
 - (void)requestCurrentUserInfo: (ResultCallback)callback {
     [requestController requestCurrentUserInfo:callback];
 }
@@ -98,5 +102,9 @@
 }
 - (int)getCurrentPhotoCount {
     return [requestController getCurrentPhotoCount];
+}
+
+- (NSString*)getCurrentAlbumId {
+    return [requestController getCurrentAlbumId];
 }
 @end

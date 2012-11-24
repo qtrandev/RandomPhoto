@@ -65,6 +65,16 @@
     [self requestRandomPhoto2:callback albumId:userId];
 }
 
+- (void)requestAlbum:(ResultCallback)callback albumId:(NSString*)albumId userId:(NSString*)userId {
+    [self requestRandomPhoto2:callback albumId:albumId];
+    // Not sure what to do with userId yet.
+    // Might want to somehow cache future albums.
+}
+
+- (void)requestAlbumsList: (ResultCallback)callback userId:userId {
+    
+}
+
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
     NSArray* albums = [data getAlbums:userId];
     if (albums != nil) {
@@ -210,6 +220,10 @@
 - (int)getCurrentPhotoCount {
     NSArray* currentAlbumPhotos = [data.photosMap objectForKey:data.currentAlbum];
     return currentAlbumPhotos.count;
+}
+
+- (NSString*)getCurrentAlbumId {
+    return data.currentAlbum;
 }
 
 @end
