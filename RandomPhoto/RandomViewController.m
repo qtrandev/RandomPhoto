@@ -169,6 +169,12 @@
     [self.navigationController pushViewController:fvc animated:YES];
 }
 
+- (IBAction)albumsClicked:(id)sender {
+    AlbumViewController* avc = [self.storyboard instantiateViewControllerWithIdentifier:@"avc1"];
+    avc.currentFriend = self.currentFriend;
+    [self.navigationController pushViewController:avc animated:YES];
+}
+
 - (void)afterFrictionlessLogin {
     [self showLoadingIndicator:YES];
     [self requestFriends];

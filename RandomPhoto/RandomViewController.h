@@ -8,6 +8,7 @@
 
 #import "RequestViewController.h"
 #import "FriendViewController.h"
+#import "AlbumViewController.h"
 
 @interface RandomViewController : RequestViewController <
     UIScrollViewDelegate,
@@ -21,4 +22,5 @@
 
 - (IBAction)goClicked:(id)sender;
 - (IBAction)moreClicked:(id)sender;
+- (IBAction)albumsClicked:(id)sender;
 @end
