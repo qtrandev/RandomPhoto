@@ -81,6 +81,10 @@
     [requestController requestAlbum:callback albumId:albumId userId:userId];
 }
 
+- (void)requestAlbumsList: (ResultCallback)callback userId:userId {
+    [requestController requestAlbumsList:callback userId:userId];
+}
+
 - (void)requestCurrentUserInfo: (ResultCallback)callback {
     [requestController requestCurrentUserInfo:callback];
 }

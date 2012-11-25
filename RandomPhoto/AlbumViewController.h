@@ -9,10 +9,13 @@
 #import "RequestViewController.h"
 #import "FriendViewController.h"
 
-@interface AlbumViewController : RequestViewController
+@interface AlbumViewController : RequestViewController<
+    UITableViewDelegate,
+    UITableViewDataSource>
 
 @property (strong, nonatomic) NSDictionary<FBGraphUser>* currentFriend;
 @property (strong, nonatomic) NSString* currentAlbum;
+@property (strong, nonatomic) NSArray* albumsList;
 
 - (IBAction)tagClicked:(id)sender;
 - (IBAction)albumClicked:(id)sender;

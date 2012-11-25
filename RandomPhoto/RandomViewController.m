@@ -174,7 +174,11 @@
     AlbumViewController* avc = [self.storyboard instantiateViewControllerWithIdentifier:@"avc1"];
     avc.currentFriend = self.currentFriend;
     avc.currentAlbum = [self getCurrentAlbumId];
-    [self.navigationController pushViewController:avc animated:YES];
+    ResultCallback callback =  ^(id result) {
+        avc.albumsList = result;
+        [self.navigationController pushViewController:avc animated:YES];
+    };
+    [self requestAlbumsList:callback userId:currentFriend.id];
 }
 
 - (void)afterFrictionlessLogin {

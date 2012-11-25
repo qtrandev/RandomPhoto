@@ -72,7 +72,30 @@
 }
 
 - (void)requestAlbumsList: (ResultCallback)callback userId:userId {
-    
+    NSArray* albums = [data getAlbums:userId];
+    if (albums != nil) {
+        if (albums.count > 0){
+            callback(albums);
+        } else {
+            callback(nil);
+        }
+
+    } else {
+        ResultCallback dataCallback = ^(id result) {
+            if (result != nil) {
+                NSArray* myAlbums = result;
+                [data setAlbums:userId albums:myAlbums];
+                if (myAlbums.count > 0) {
+                    callback(myAlbums);
+                } else {
+                    callback(nil);
+                }
+            } else {
+                callback(nil);
+            }
+        };
+        [requester requestAlbums:dataCallback userId:userId];
+    }
 }
 
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {

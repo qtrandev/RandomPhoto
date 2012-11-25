@@ -435,6 +435,15 @@
                                     <action selector="albumClicked:" destination="Vhy-yj-WB4" eventType="touchUpInside" id="lLc-sa-KXo"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hD8-Wg-AbI">
+                                <rect key="frame" x="34" y="142" width="252" height="242"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Vhy-yj-WB4" id="VLi-TR-zII"/>
+                                    <outlet property="delegate" destination="Vhy-yj-WB4" id="ULD-3U-jzf"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>

@@ -12,6 +12,7 @@
 
 @synthesize currentFriend;
 @synthesize currentAlbum;
+@synthesize albumsList;
 
 - (IBAction)tagClicked:(id)sender {
     FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
@@ -25,5 +26,45 @@
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
     [fvc requestAlbum:self.currentAlbum userId:currentFriend.id];
+}
+
+#pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (albumsList != nil) {
+        return albumsList.count;
+    } else {
+        return 0;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AlbumCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"AlbumCell"];
+    }
+    
+    FBGraphObject *album = [albumsList objectAtIndex:indexPath.row];
+    NSString* name = [album objectForKey:@"name"];
+    cell.textLabel.text = name;
+    FBGraphObject *count = [album valueForKey:@"count"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ photos", count];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FBGraphObject *album = [albumsList objectAtIndex:indexPath.row];
+    FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
+    fvc.currentFriend = self.currentFriend;
+    [self.navigationController pushViewController:fvc animated:YES];
+    [fvc requestAlbum:[album objectForKey:@"id"] userId:currentFriend.id];
 }
 @end
