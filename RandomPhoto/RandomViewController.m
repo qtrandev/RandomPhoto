@@ -18,6 +18,7 @@
 @synthesize captionLabel;
 @synthesize likesLabel;
 @synthesize commentsLabel;
+@synthesize albumInfoLabel;
 @synthesize currentFriend;
 
 - (void)requestFriends {
@@ -77,6 +78,19 @@
     } else {
         [commentsLabel setText:@""];
     }
+    ResultCallback albumsListCallback = ^(id result) {
+        NSArray* albums = result;
+        NSString* currentId = [self getCurrentAlbumId];
+        for (FBGraphObject* album in albums) {
+            if ([currentId isEqualToString:[album objectForKey:@"id"]]) {
+                NSString* albumInfoText = [NSString stringWithFormat:@"%@ - %d of %d photos",[album objectForKey:@"name"],[self getCurrentPhotoIndex],[self getCurrentPhotoCount]];
+                [albumInfoLabel setText:albumInfoText];
+                break;
+            }
+        }
+        
+    };
+    [self requestAlbumsList:albumsListCallback userId:currentFriend.id];
 }
 
 - (void)resetZoom {
@@ -132,6 +146,7 @@
     [self setCaptionLabel:nil];
     [self setLikesLabel:nil];
     [self setCommentsLabel:nil];
+    [self setAlbumInfoLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -190,5 +205,6 @@
     [likesLabel setText:@""];
     [captionLabel setText:@""];
     [commentsLabel setText:@""];
+    [albumInfoLabel setText:@""];
 }
 @end

@@ -23,6 +23,7 @@
 @synthesize commentsLabel;
 @synthesize countLabel;
 @synthesize currentFriend;
+@synthesize currentAlbumName;
 @synthesize savedComments;
 @synthesize savedLikes;
 
