@@ -55,12 +55,17 @@
     NSString* name = [album objectForKey:@"name"];
     cell.textLabel.text = name;
     FBGraphObject *count = [album valueForKey:@"count"];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ photos", count];
+    NSString* displayText = [NSString stringWithFormat:@"%@ photos", count==nil?@"0":count];
+    if ([displayText isEqualToString:@"1 photos"]) {
+        displayText = @"1 photo";
+    }
+    cell.detailTextLabel.text = displayText;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     FBGraphObject *album = [albumsList objectAtIndex:indexPath.row];
     FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
     fvc.currentFriend = self.currentFriend;
