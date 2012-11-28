@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *countLabel;
 @property (strong, nonatomic) NSDictionary<FBGraphUser>* currentFriend;
 @property (strong, nonatomic) NSString* currentAlbumName;
+@property (strong, nonatomic) NSString* createdDate;
 @property (strong, nonatomic) NSArray* savedComments;
 @property (strong, nonatomic) NSArray* savedLikes;
 

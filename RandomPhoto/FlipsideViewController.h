@@ -18,6 +18,8 @@
 @interface FlipsideViewController : UIViewController <
     UITableViewDataSource>
 
+@property (strong, nonatomic) IBOutlet UILabel *detailsLabel;
+@property (strong, nonatomic) NSString* createdDate;
 @property (weak, nonatomic) id <FlipsideViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSArray* savedComments;
 @property (strong, nonatomic) NSArray* savedLikes;

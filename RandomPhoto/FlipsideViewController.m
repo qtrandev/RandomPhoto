@@ -14,6 +14,8 @@
 
 @implementation FlipsideViewController
 
+@synthesize detailsLabel;
+@synthesize createdDate;
 @synthesize delegate = _delegate;
 @synthesize savedComments;
 @synthesize savedLikes;
@@ -22,10 +24,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    detailsLabel.text = createdDate;
 }
 
 - (void)viewDidUnload
 {
+    [self setDetailsLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

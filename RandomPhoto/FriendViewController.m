@@ -24,6 +24,7 @@
 @synthesize countLabel;
 @synthesize currentFriend;
 @synthesize currentAlbumName;
+@synthesize createdDate;
 @synthesize savedComments;
 @synthesize savedLikes;
 
@@ -236,6 +237,7 @@
     FBGraphObject* photo = result;
     NSString* photoLink = [photo objectForKey:@"source"];
     NSString* caption = [photo objectForKey:@"name"];
+    createdDate = [photo objectForKey:@"created_time"];
     FBGraphObject* likes = [photo objectForKey:@"likes"];
     FBGraphObject* comments = [photo objectForKey:@"comments"];
     [self displayImageLink:photoLink];
@@ -297,6 +299,7 @@
         //[fvc setTitleName:@"Comments"];
         fvc.savedComments = savedComments;
         fvc.savedLikes = savedLikes;
+        fvc.createdDate = createdDate;
     }
 }
 
