@@ -83,7 +83,7 @@
         NSString* currentId = [self getCurrentAlbumId];
         for (FBGraphObject* album in albums) {
             if ([currentId isEqualToString:[album objectForKey:@"id"]]) {
-                NSString* albumInfoText = [NSString stringWithFormat:@"%@ - %d of %d photos",[album objectForKey:@"name"],[self getCurrentPhotoIndex],[self getCurrentPhotoCount]];
+                NSString* albumInfoText = [NSString stringWithFormat:@"%@ - %d photos",[album objectForKey:@"name"],[self getCurrentPhotoCount]];
                 [albumInfoLabel setText:albumInfoText];
                 break;
             }
