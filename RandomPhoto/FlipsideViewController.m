@@ -24,7 +24,17 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    detailsLabel.text = createdDate;
+    detailsLabel.text = [self getUserFriendlyDate:createdDate];
+}
+
+- (NSString*)getUserFriendlyDate: (NSString*) dateString
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"YYYY-MM-DD'T'hh:mm:ssZZZZ"];
+    NSDate *date = [dateFormat dateFromString:dateString];
+    [dateFormat setDateFormat:@"MMM d, YYYY"];
+    NSString* string = [dateFormat stringFromDate:date];
+    return string;
 }
 
 - (void)viewDidUnload
