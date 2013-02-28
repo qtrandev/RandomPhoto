@@ -77,6 +77,7 @@
                                               style:UIBarButtonItemStyleBordered
                                               target:self
                                               action:@selector(pickClicked:)];
+    [self addGestureRecognizers];
 }
 
 //- (void)viewDidAppear:(BOOL)animated {
@@ -107,6 +108,38 @@
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     
     return imageView;
+}
+
+- (void)addGestureRecognizers
+{
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    [doubleTap setNumberOfTapsRequired:2];
+    [self.view addGestureRecognizer:doubleTap];
+    
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:rightSwipe];
+    
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+    [leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:leftSwipe];
+}
+
+-(void)handleDoubleTap:(UITapGestureRecognizer *)doubleTap
+{
+    [self resetZoom];
+}
+
+-(void)handleRightSwipe:(UITapGestureRecognizer *)rightSwipe
+{
+    // Right swipe, so go back left
+    [self previousClicked:nil];
+}
+
+-(void)handleLeftSwipe:(UITapGestureRecognizer *)leftSwipe
+{
+    // Left swipe, so go forward right
+    [self nextClicked:nil];
 }
 
 - (void) requestCurrentUser {
