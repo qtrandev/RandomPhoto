@@ -72,4 +72,24 @@
     [self.navigationController pushViewController:fvc animated:YES];
     [fvc requestAlbum:[album objectForKey:@"id"] userId:currentFriend.id];
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Allow swipe to exit albums view
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+    [leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:leftSwipe];
+}
+
+-(void)handleLeftSwipe:(UITapGestureRecognizer *)leftSwipe
+{
+    // Go back to main photos page on swipe
+    [UIView animateWithDuration:0.75 animations:^{
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+    }];
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 @end
