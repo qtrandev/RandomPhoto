@@ -126,6 +126,27 @@
                                               style:UIBarButtonItemStyleBordered
                                               target:self
                                               action:@selector(pickClicked:)];
+    // Handle swiping to view albums and photos
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipe:)];
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:rightSwipe];
+    
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
+    [leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:leftSwipe];
+}
+
+
+-(void)handleRightSwipe:(UITapGestureRecognizer *)rightSwipe
+{
+    // Right swipe, so select left command
+    [self albumsClicked:nil];
+}
+
+-(void)handleLeftSwipe:(UITapGestureRecognizer *)leftSwipe
+{
+    // Left swipe, so select right command
+    [self moreClicked:nil];
 }
 
 //- (void)viewDidAppear:(BOOL)animated
@@ -191,7 +212,11 @@
     avc.currentAlbum = [self getCurrentAlbumId];
     ResultCallback callback =  ^(id result) {
         avc.albumsList = result;
-        [self.navigationController pushViewController:avc animated:YES];
+        [UIView animateWithDuration:0.75 animations:^{
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            [self.navigationController pushViewController:avc animated:NO];
+            [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+        }];
     };
     [self requestAlbumsList:callback userId:currentFriend.id];
 }
