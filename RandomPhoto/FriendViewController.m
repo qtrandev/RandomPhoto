@@ -123,6 +123,69 @@
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipe:)];
     [leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
     [self.view addGestureRecognizer:leftSwipe];
+    
+    UIPanGestureRecognizer *panImage = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDetected:)];
+    [imageView addGestureRecognizer:panImage];
+}
+
+// TODO - Handle rotation of screen
+-(void)panDetected:(UIPanGestureRecognizer *)panImage
+{
+    CGPoint translation = [panImage translationInView:self.view];
+    CGPoint imageViewPosition = imageView.center;
+    imageViewPosition.x += translation.x;
+    
+    imageView.center = imageViewPosition;
+    [panImage setTranslation:CGPointZero inView:self.view];
+    
+    CGPoint velocity = [panImage velocityInView:self.view];
+    
+    if (panImage.state == UIGestureRecognizerStateEnded)
+    {
+        // Don't move if change in x is not big enough
+        if (abs(imageView.center.x - self.view.center.x) > imageView.bounds.size.width/3)
+        {
+            [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+                             animations:^ {
+                                 CGPoint c = imageView.center;
+                                 if (velocity.x > 0) {
+                                     c.x = imageView.bounds.size.width;
+                                 }
+                                 imageView.center = c;
+                             }
+                             completion:NULL];
+            if (velocity.x > 0)
+            {
+                [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+                                 animations:^ {
+                                     CGPoint c = imageView.center;
+                                     c.x += imageView.bounds.size.width;
+                                     imageView.center = c;
+                                 }
+                                 completion:^ (BOOL finished){
+                                     [self previousClicked:nil];
+                                 }];
+            }
+            else
+            {
+                [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+                                 animations:^ {
+                                     CGPoint c = imageView.center;
+                                     c.x -= imageView.bounds.size.width;
+                                     imageView.center = c;
+                                 }
+                                 completion:^ (BOOL finished){
+                                     [self nextClicked:nil];
+                                 }];
+            }
+        } else { // return to original position
+            [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+                             animations:^ {
+                                 imageView.center = self.view.center;
+                             }
+                             completion:NULL];
+        }
+    }
 }
 
 -(void)handleDoubleTap:(UITapGestureRecognizer *)doubleTap
@@ -243,6 +306,7 @@
         if (result != nil) {
             [self displayPhotoResponse:result];
         } else {
+            [self resetZoom];
             self.navigationItem.title = @"Previous not found";
         }
         [self displayButtons:YES];
@@ -258,6 +322,7 @@
         if (result != nil) {
             [self displayPhotoResponse:result];
         } else {
+            [self resetZoom];
             self.navigationItem.title = @"Next not found";
         }
         [self displayButtons:YES];
@@ -304,6 +369,7 @@
 
 - (void)resetZoom {
     [scrollView setZoomScale:1.0f];
+    imageView.center = scrollView.center;
 }
 
 - (void)setTitleBar {
