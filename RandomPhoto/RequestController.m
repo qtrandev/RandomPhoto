@@ -114,10 +114,10 @@
                 if (myAlbums.count > 0) {
                     [self handleAlbums:callback albums:myAlbums userId:userId];
                 } else {
-                    callback(nil);
+                    callback(nil); // Never seems to be called
                 }
             } else {
-                callback(nil);
+                callback(nil); // This gets called if no albums
             }
         };
         [requester requestAlbums:dataCallback userId:userId];
