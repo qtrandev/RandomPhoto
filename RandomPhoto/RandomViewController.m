@@ -39,17 +39,27 @@
     [self displayProfileImage:friend1.id];
     self.navigationItem.title = friend1.name;
     self.currentFriend = friend1;
-    ResultCallback callback = ^(id result) {
+    ResultCallback callback = ^(id result) { // Expect a random photo back
         [self showLoadingIndicator:NO];
         if (result != nil) {
             [self displayPhotoResponse:result];
         } else {
-            // Try another random friend
-            [self requestFriends];
+            // No albums so request tagged photos
+            NSLog(@"%@ - No albums", friend1.name);
+            ResultCallback callback = ^(id result) {
+                if (result != nil) {
+                    [self displayPhotoResponse:result];
+                } else {
+                    // No tagged photos so try another random friend
+                    [self requestFriends];
+                }
+            };
+            [super requestAlbum:callback albumId:friend1.id userId:friend1.id];
         }
     };
     [self showLoadingIndicator:YES];
-    [self requestRandomPhoto:callback userId:friend1.id];
+    NSLog(@"Requesting random photo for %@", friend1.name);
+    [self requestRandomPhoto:callback userId:friend1.id]; // Request a random photo
 }
 
 - (void)displayPhotoResponse: (id)result{
