@@ -7,6 +7,7 @@
 //
 
 #import "AlbumViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation AlbumViewController
 
@@ -85,10 +86,12 @@
 -(void)handleLeftSwipe:(UITapGestureRecognizer *)leftSwipe
 {
     // Go back to main photos page on swipe
-    [UIView animateWithDuration:0.75 animations:^{
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-    }];
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.50f];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromRight];
+    [self.navigationController.view.layer removeAllAnimations];
+    [self.navigationController.view.layer addAnimation:animation forKey:kCATransition];
     [self.navigationController popViewControllerAnimated:NO];
 }
 

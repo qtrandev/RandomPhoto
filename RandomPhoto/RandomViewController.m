@@ -7,6 +7,7 @@
 //
 
 #import "RandomViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface RandomViewController ()
 
@@ -222,11 +223,13 @@
     avc.currentAlbum = [self getCurrentAlbumId];
     ResultCallback callback =  ^(id result) {
         avc.albumsList = result;
-        [UIView animateWithDuration:0.75 animations:^{
-            [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-            [self.navigationController pushViewController:avc animated:NO];
-            [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
-        }];
+        CATransition *animation = [CATransition animation];
+        [animation setDuration:0.50f];
+        [animation setType:kCATransitionPush];
+        [animation setSubtype:kCATransitionFromLeft];
+        [self.navigationController.view.layer removeAllAnimations];
+        [self.navigationController.view.layer addAnimation:animation forKey:kCATransition];
+        [self.navigationController pushViewController:avc animated:NO];
     };
     [self requestAlbumsList:callback userId:currentFriend.id];
 }
