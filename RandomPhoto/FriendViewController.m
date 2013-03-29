@@ -19,8 +19,10 @@
 @synthesize previousButton;
 @synthesize nextButton;
 @synthesize likesLabel;
+@synthesize likesIcon;
 @synthesize captionLabel;
 @synthesize commentsLabel;
+@synthesize commentsIcon;
 @synthesize countLabel;
 @synthesize currentFriend;
 @synthesize currentAlbumName;
@@ -101,9 +103,11 @@
     [self setImageView:nil];
     [self setNextButton:nil];
     [self setPreviousButton:nil];
+    [self setLikesIcon:nil];
     [self setLikesLabel:nil];
     [self setCaptionLabel:nil];
     [self setCommentsLabel:nil];
+    [self setCommentsIcon:nil];
     [self setCountLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -332,18 +336,22 @@
     }
     if (likes != nil) {
         NSArray* likesList = [likes objectForKey:@"data"];
-        [likesLabel setText:[NSString stringWithFormat:@"Likes: %d",likesList.count]];
+        [likesLabel setText:[NSString stringWithFormat:@"%d",likesList.count]];
+        [likesIcon setHidden:NO];
         savedLikes = likesList;
     } else {
         [likesLabel setText:@""];
+        [likesIcon setHidden:YES];
         savedLikes = nil;
     }
     if (comments != nil) {
         NSArray* commentsList = [comments objectForKey:@"data"];
-        [commentsLabel setText:[NSString stringWithFormat:@"Comments: %d",commentsList.count]];
+        [commentsLabel setText:[NSString stringWithFormat:@"%d",commentsList.count]];
+        [commentsIcon setHidden:NO];
         savedComments = commentsList;
     } else {
         [commentsLabel setText:@""];
+        [commentsIcon setHidden:YES];
         savedComments = nil;
     }
     [countLabel setText:[NSString stringWithFormat:@"[%d/%d]",
@@ -362,8 +370,10 @@
 
 - (void)clearTextLabels {
     [likesLabel setText:@""];
+    [likesIcon setHidden:YES];
     [captionLabel setText:@""];
     [commentsLabel setText:@""];
+    [commentsIcon setHidden:YES];
     [countLabel setText:@""];
 }
 
