@@ -226,11 +226,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zqv-MF-1u8">
-                                <rect key="frame" x="136" y="362" width="50" height="40"/>
+                                <rect key="frame" x="140" y="362" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="Current Friend"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal" title="Go">
+                                <state key="normal" title="Go" image="go.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -356,11 +357,11 @@
                                 <size key="shadowOffset" width="1" height="-1"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FXN-lI-4pG">
-                                <rect key="frame" x="100" y="403" width="120" height="40"/>
+                                <rect key="frame" x="140" y="403" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal" title="Any Friend">
+                                <state key="normal" image="all friends.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -373,11 +374,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="azb-NG-FwE">
-                                <rect key="frame" x="247" y="403" width="60" height="40"/>
+                                <rect key="frame" x="275" y="403" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="More"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal" title="More">
+                                <state key="normal" image="more.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -390,11 +392,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2iq-3P-Im6">
-                                <rect key="frame" x="10" y="403" width="80" height="40"/>
+                                <rect key="frame" x="10" y="403" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="Albums"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal" title="Albums">
+                                <state key="normal" image="albums.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -551,9 +554,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="albums.png" width="512" height="512"/>
+        <image name="all friends.png" width="512" height="512"/>
         <image name="comments.png" width="512" height="512"/>
+        <image name="go.png" width="512" height="512"/>
         <image name="like.gif" width="24" height="24"/>
         <image name="logo.png" width="420" height="62"/>
+        <image name="more.png" width="512" height="512"/>
     </resources>
     <classes>
         <class className="AlbumViewController" superclassName="RequestViewController">
