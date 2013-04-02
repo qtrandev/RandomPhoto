@@ -215,8 +215,13 @@
 - (void)getPreviousPhoto: (ResultCallback)callback {
     [self getPhotoPosition:callback step:-1];
 }
+
 - (void)getNextPhoto: (ResultCallback)callback {
     [self getPhotoPosition:callback step:1];
+}
+
+- (void)getCurrentPhoto: (ResultCallback)callback {
+    [self getPhotoPosition:callback step:0];
 }
 
 - (void)getPhotoPosition: (ResultCallback)callback step:(int)step {

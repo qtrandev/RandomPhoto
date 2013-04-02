@@ -27,6 +27,7 @@
 - (void)requestRandomFriend: (ResultCallback)callback;
 - (void)getPreviousPhoto: (ResultCallback)callback;
 - (void)getNextPhoto: (ResultCallback)callback;
+- (void)getCurrentPhoto: (ResultCallback)callback;
 - (int)getCurrentPhotoIndex;
 - (int)getCurrentPhotoCount;
 - (NSString*)getCurrentAlbumId;

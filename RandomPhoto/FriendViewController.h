@@ -32,6 +32,7 @@
 - (void)pickClicked:(id)sender;
 - (IBAction)previousClicked:(id)sender;
 - (IBAction)nextClicked:(id)sender;
+- (void)displayCurrentPhoto;
 - (void)requestTaggedPhotos;
 - (void)requestAlbum:(NSString*)albumId userId:(NSString*)userId;
 

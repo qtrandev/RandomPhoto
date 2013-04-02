@@ -319,6 +319,22 @@
     [self showLoadingIndicator:NO];
 }
 
+- (void)displayCurrentPhoto {
+    [self displayButtons:NO];
+    [self showLoadingIndicator:YES];
+    ResultCallback callback = ^(id result) {
+        if (result != nil) {
+            [self displayPhotoResponse:result];
+        } else {
+            [self resetZoom];
+            self.navigationItem.title = @"No photo found";
+        }
+        [self displayButtons:YES];
+    };
+    [self getCurrentPhoto:callback];
+    [self showLoadingIndicator:NO];
+}
+
 - (void)displayPhotoResponse: (id)result{
     FBGraphObject* photo = result;
     NSString* photoLink = [photo objectForKey:@"source"];

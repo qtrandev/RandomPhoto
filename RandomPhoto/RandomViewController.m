@@ -215,7 +215,7 @@
     fvc.requestController = self.requestController;
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
-    [fvc nextClicked:nil];
+    [fvc displayCurrentPhoto];
 }
 
 - (IBAction)albumsClicked:(id)sender {
