@@ -184,7 +184,7 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="like.gif" id="Wx5-mk-S5Q">
                                 <rect key="frame" x="285" y="110" width="24" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Count" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ceo-Bc-yxV">
                                 <rect key="frame" x="235" y="40" width="80" height="20"/>
