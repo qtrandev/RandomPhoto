@@ -27,7 +27,7 @@
                                 @"user_photos",
                                 @"friends_photos",
                                 nil];
-        [FBSession openActiveSessionWithPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+        [FBSession openActiveSessionWithReadPermissions:permissions allowLoginUI:YES completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
             // session might now be open.
             if (!error) {
                 callback();

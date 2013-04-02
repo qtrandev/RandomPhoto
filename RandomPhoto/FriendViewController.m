@@ -145,7 +145,7 @@
         // Don't move if change in x is not big enough
         if (abs(imageView.center.x - self.view.center.x) > imageView.bounds.size.width/3)
         {
-            [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+            [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^ {
                                  CGPoint c = imageView.center;
                                  if (velocity.x > 0) {
@@ -156,7 +156,7 @@
                              completion:NULL];
             if (velocity.x > 0)
             {
-                [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+                [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut
                                  animations:^ {
                                      CGPoint c = imageView.center;
                                      c.x += imageView.bounds.size.width;
@@ -168,7 +168,7 @@
             }
             else
             {
-                [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+                [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut
                                  animations:^ {
                                      CGPoint c = imageView.center;
                                      c.x -= imageView.bounds.size.width;
@@ -179,7 +179,7 @@
                                  }];
             }
         } else { // return to original position
-            [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationCurveEaseInOut
+            [UIView animateWithDuration:.25 delay:0 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^ {
                                  imageView.center = self.view.center;
                              }
@@ -193,7 +193,7 @@
     if (scrollView.zoomScale > 1.0f) {
         [self resetZoom];
     } else {
-        float newScale = 2.5f;
+        float newScale = 2.0f;
         CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[doubleTap locationInView:doubleTap.view]];
         [scrollView zoomToRect:zoomRect animated:YES];
     }
@@ -360,7 +360,7 @@
     FBGraphObject* comments = [photo objectForKey:@"comments"];
     [self displayImageLink:photoLink];
     if (caption != nil) {
-        captionLabel.frame = CGRectMake(10,10,300,100); // Not good when screen size changes.
+        captionLabel.frame =  [self calcCaptionLabelSize];
         [captionLabel setText:caption];
         [captionLabel sizeToFit];
     } else {
@@ -389,6 +389,10 @@
     [countLabel setText:[NSString stringWithFormat:@"[%d/%d]",
                          [self getCurrentPhotoIndex]+1,
                          [self getCurrentPhotoCount]]];
+}
+
+- (CGRect)calcCaptionLabelSize {
+    return CGRectMake(10,10,self.view.frame.size.width-60,100);
 }
 
 - (void)resetZoom {
