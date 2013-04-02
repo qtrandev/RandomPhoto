@@ -31,4 +31,6 @@
 - (int)getCurrentPhotoCount;
 - (NSString*)getCurrentAlbumId;
 
+@property (strong, nonatomic) RequestController *requestController;
+
 @end

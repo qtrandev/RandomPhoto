@@ -9,9 +9,6 @@
 #import "RequestViewController.h"
 
 @interface RequestViewController ()
-
-@property (strong, nonatomic) RequestController *requestController;
-
 @end
 
 @implementation RequestViewController

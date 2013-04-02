@@ -212,9 +212,10 @@
 
 - (IBAction)moreClicked:(id)sender {
     FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
+    fvc.requestController = self.requestController;
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
-    [fvc requestAlbum:[self getCurrentAlbumId] userId:currentFriend.id];
+    [fvc nextClicked:nil];
 }
 
 - (IBAction)albumsClicked:(id)sender {
