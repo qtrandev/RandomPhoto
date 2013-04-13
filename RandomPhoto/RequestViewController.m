@@ -25,6 +25,12 @@
     }];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self showLoadingIndicator:NO];
+    [super viewDidDisappear:animated];
+}
+
 - (BOOL)checkLogin:(BOOL)displayLoginWindow {
     if (!FBSession.activeSession.isOpen) {
         if (displayLoginWindow) {
