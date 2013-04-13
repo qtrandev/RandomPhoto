@@ -61,8 +61,11 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)shouldAutorotate {
     return YES;
 }
 
