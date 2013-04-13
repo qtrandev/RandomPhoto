@@ -226,7 +226,7 @@
 
 - (void)getPhotoPosition: (ResultCallback)callback step:(int)step {
     NSArray* currentAlbumPhotos = [data.photosMap objectForKey:data.currentAlbum];
-    if (currentAlbumPhotos.count > 1) {
+    if (currentAlbumPhotos.count > 0) {
         int newIndex = data.currentPhotoIndex+step;
         if (newIndex < 0) {
             newIndex = currentAlbumPhotos.count + newIndex;
