@@ -31,7 +31,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="brq-wZ-fIj">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logo.png" id="4th-PH-45S">
                                     <rect key="frame" x="0.0" y="25" width="320" height="44"/>
