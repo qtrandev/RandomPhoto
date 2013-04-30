@@ -111,6 +111,14 @@
     [requestController getCurrentPhoto:callback];
 }
 
+- (void)getFirstPhoto: (ResultCallback)callback {
+    [requestController getFirstPhoto:callback];
+}
+
+- (void)getRandomPhoto: (ResultCallback)callback {
+    [requestController getRandomPhoto:callback];
+}
+
 - (int)getCurrentPhotoIndex {
     return [requestController getCurrentPhotoIndex];
 }

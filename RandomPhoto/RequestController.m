@@ -224,6 +224,16 @@
     [self getPhotoPosition:callback step:0];
 }
 
+- (void)getFirstPhoto: (ResultCallback)callback {
+    data.currentPhotoIndex = 0;
+    [self getCurrentPhoto:callback];
+}
+
+- (void)getRandomPhoto: (ResultCallback)callback {
+    data.currentPhotoIndex = arc4random()%[self getCurrentPhotoCount];
+    [self getCurrentPhoto:callback];
+}
+
 - (void)getPhotoPosition: (ResultCallback)callback step:(int)step {
     NSArray* currentAlbumPhotos = [data.photosMap objectForKey:data.currentAlbum];
     if (currentAlbumPhotos.count > 0) {

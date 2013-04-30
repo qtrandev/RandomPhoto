@@ -26,6 +26,8 @@
 - (void)getPreviousPhoto: (ResultCallback)callback;
 - (void)getNextPhoto: (ResultCallback)callback;
 - (void)getCurrentPhoto: (ResultCallback)callback;
+- (void)getFirstPhoto: (ResultCallback)callback;
+- (void)getRandomPhoto: (ResultCallback)callback;
 - (int)getCurrentPhotoIndex;
 - (int)getCurrentPhotoCount;
 - (NSString*)getCurrentAlbumId;

@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIButton *previousButton;
 @property (strong, nonatomic) IBOutlet UIButton *nextButton;
+@property (strong, nonatomic) IBOutlet UIButton *firstButton;
+@property (strong, nonatomic) IBOutlet UIButton *randomButton;
 @property (strong, nonatomic) IBOutlet UILabel *likesLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *likesIcon;
 @property (strong, nonatomic) IBOutlet UILabel *captionLabel;
@@ -32,6 +34,8 @@
 - (void)pickClicked:(id)sender;
 - (IBAction)previousClicked:(id)sender;
 - (IBAction)nextClicked:(id)sender;
+- (IBAction)randomClicked:(id)sender;
+- (IBAction)firstClicked:(id)sender;
 - (void)displayCurrentPhoto;
 - (void)requestTaggedPhotos;
 - (void)requestAlbum:(NSString*)albumId userId:(NSString*)userId;

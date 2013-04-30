@@ -18,6 +18,8 @@
 @synthesize imageView;
 @synthesize previousButton;
 @synthesize nextButton;
+@synthesize firstButton;
+@synthesize randomButton;
 @synthesize likesLabel;
 @synthesize likesIcon;
 @synthesize captionLabel;
@@ -37,8 +39,42 @@
 }
 
 - (void)displayButtons: (BOOL)show {
-    previousButton.hidden = !show;
-    nextButton.hidden = !show;
+    int index = [self getCurrentPhotoIndex];
+    int count = [self getCurrentPhotoCount];
+    previousButton.hidden = !(show && [self shouldDisplayPreviousButton:index count:count]);
+    nextButton.hidden = !(show && [self shouldDisplayNextButton:index count:count]);
+    firstButton.hidden = !(show && [self shouldDisplayFirstButton:index count:count]);
+    randomButton.hidden = !(show && [self shouldDisplayRandomButton:index count:count]);
+}
+
+- (BOOL)shouldDisplayPreviousButton: (int)index count:(int)count {
+    if (count==1) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)shouldDisplayNextButton: (int)index count:(int)count {
+    if (count==1) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)shouldDisplayFirstButton: (int)index count:(int)count {
+    if (count<3) {
+        return NO;
+    } else if (index==0) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)shouldDisplayRandomButton: (int)index count:(int)count {
+    if (count<3) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)displayCurrentUser {
@@ -109,6 +145,8 @@
     [self setCommentsLabel:nil];
     [self setCommentsIcon:nil];
     [self setCountLabel:nil];
+    [self setFirstButton:nil];
+    [self setRandomButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -332,6 +370,38 @@
         [self displayButtons:YES];
     };
     [self getNextPhoto:callback];
+    [self showLoadingIndicator:NO];
+}
+
+- (IBAction)randomClicked:(id)sender {
+    [self displayButtons:NO];
+    [self showLoadingIndicator:YES];
+    ResultCallback callback = ^(id result) {
+        if (result != nil) {
+            [self displayPhotoResponse:result];
+        } else {
+            [self resetZoom];
+            self.navigationItem.title = @"No photo found";
+        }
+        [self displayButtons:YES];
+    };
+    [self getRandomPhoto:callback];
+    [self showLoadingIndicator:NO];
+}
+
+- (IBAction)firstClicked:(id)sender {
+    [self displayButtons:NO];
+    [self showLoadingIndicator:YES];
+    ResultCallback callback = ^(id result) {
+        if (result != nil) {
+            [self displayPhotoResponse:result];
+        } else {
+            [self resetZoom];
+            self.navigationItem.title = @"No photo found";
+        }
+        [self displayButtons:YES];
+    };
+    [self getFirstPhoto:callback];
     [self showLoadingIndicator:NO];
 }
 
