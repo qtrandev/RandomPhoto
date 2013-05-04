@@ -21,7 +21,9 @@
         requestController = [[RequestController alloc] init];
     }
     [self attemptFrictionlessLogin: ^(void) {
-        [self afterFrictionlessLogin];
+        if ([requestController isSessionOpen]) {
+            [self afterFrictionlessLogin];
+        }
     }];
 }
 
@@ -32,7 +34,7 @@
 }
 
 - (BOOL)checkLogin:(BOOL)displayLoginWindow {
-    if (!FBSession.activeSession.isOpen) {
+    if (![requestController isSessionOpen]) {
         if (displayLoginWindow) {
             [self displayLoginScreen];
         }
