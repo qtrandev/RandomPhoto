@@ -32,4 +32,6 @@
 - (int)getCurrentPhotoCount;
 - (NSString*)getCurrentAlbumId;
 
+@property BOOL requestInProgress;
+
 @end

@@ -19,6 +19,7 @@
 @synthesize requester;
 @synthesize data;
 @synthesize friendPickerController;
+@synthesize requestInProgress;
 
 - (id)init
 {
@@ -26,6 +27,7 @@
     if (self) {
         requester = [[FBRequester alloc] init];
         data = [[DataHolder alloc] init];
+        requestInProgress = NO;
     }
     return self;
 }
