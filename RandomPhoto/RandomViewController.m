@@ -102,6 +102,7 @@
         
     };
     [self requestAlbumsList:albumsListCallback userId:currentFriend.id];
+    [self setRequestInProgress:NO];
 }
 
 - (void)resetZoom {
@@ -204,8 +205,13 @@
 }
 
 - (IBAction)goClicked:(id)sender {
+    if ([self isRequestInProgress]) {
+        NSLog(@"Request already in progress. Ignored goClick");
+        return;
+    }
     if ([self checkLogin:YES]) {
         [self showLoadingIndicator:YES];
+        [self setRequestInProgress:YES];
         [self requestFriends];
     }
 }

@@ -77,6 +77,13 @@
     return YES;
 }
 
+- (BOOL)isRequestInProgress {
+    return requestController.requestInProgress;
+}
+- (void)setRequestInProgress: (BOOL)inProgress {
+    requestController.requestInProgress = inProgress;
+}
+
 - (void)requestRandomPhoto: (ResultCallback)callback userId:(NSString*)userId {
     [requestController requestRandomPhoto:callback userId:userId];
 }

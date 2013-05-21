@@ -33,6 +33,8 @@
 - (int)getCurrentPhotoIndex;
 - (int)getCurrentPhotoCount;
 - (NSString*)getCurrentAlbumId;
+- (BOOL)isRequestInProgress;
+- (void)setRequestInProgress: (BOOL)inProgress;
 
 @property (strong, nonatomic) RequestController *requestController;
 
