@@ -228,10 +228,15 @@
 
 -(void)handleDoubleTap:(UITapGestureRecognizer *)doubleTap
 {
-    if (scrollView.zoomScale > 1.0f) {
+    if (scrollView.zoomScale >= 4.0f) {
         [self resetZoom];
     } else {
-        float newScale = 2.0f;
+        float newScale;
+        if (scrollView.zoomScale <= 1.0f) {
+            newScale = 2.0f;
+        } else {
+            newScale = 4.0f;
+        }
         CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[doubleTap locationInView:doubleTap.view]];
         [scrollView zoomToRect:zoomRect animated:YES];
     }
@@ -239,11 +244,11 @@
 
 -(CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
     CGRect zoomRect;
-    zoomRect.size.height = [imageView frame].size.height / scale;
-    zoomRect.size.width = [imageView frame].size.width / scale;
-    center = [imageView convertPoint:center fromView:self.view];
-    zoomRect.origin.x = center.x - ((zoomRect.size.width / 2.0));
-    zoomRect.origin.y = center.y - ((zoomRect.size.height / 2.0));
+    zoomRect.size.height = [scrollView frame].size.height / scale;
+    zoomRect.size.width = [scrollView frame].size.width / scale;
+    center = [scrollView convertPoint:center fromView:self.view];
+    zoomRect.origin.x = center.x/(scale/2) - ((zoomRect.size.width / 2.0));
+    zoomRect.origin.y = center.y/(scale/2) - ((zoomRect.size.height / 2.0));
     return zoomRect;
 }
 
