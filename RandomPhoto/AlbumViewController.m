@@ -20,6 +20,10 @@
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
     [fvc requestAlbum:currentFriend.id userId:currentFriend.id];
+    // Remove jumping back to Albums page
+    NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+    [navigationArray removeObjectAtIndex:navigationArray.count-2];
+    self.navigationController.viewControllers = navigationArray;
 }
 
 - (IBAction)albumClicked:(id)sender {
@@ -27,6 +31,10 @@
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
     [fvc requestAlbum:self.currentAlbum userId:currentFriend.id];
+    // Remove jumping back to Albums page
+    NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+    [navigationArray removeObjectAtIndex:navigationArray.count-2];
+    self.navigationController.viewControllers = navigationArray;
 }
 
 #pragma mark - Table View
@@ -72,6 +80,10 @@
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
     [fvc requestAlbum:[album objectForKey:@"id"] userId:currentFriend.id];
+    // Remove jumping back to Albums page
+    NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+    [navigationArray removeObjectAtIndex:navigationArray.count-2];
+    self.navigationController.viewControllers = navigationArray;
 }
 
 - (void)viewDidLoad
