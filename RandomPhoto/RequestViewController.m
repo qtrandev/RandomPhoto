@@ -51,6 +51,7 @@
 
 - (void)attemptFrictionlessLogin: (RequestCallback)callback {
     if (![requestController isSessionOpen]) {
+        NSLog(@"Session is not open on frictionless login - trying to open it");
         [requestController frictionlesssLogin:callback];
     } else {
         callback();

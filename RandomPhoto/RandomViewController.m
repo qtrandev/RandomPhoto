@@ -242,6 +242,7 @@
 }
 
 - (void)afterFrictionlessLogin {
+    NSLog(@"afterFrictionlessLogin CALLED");
     [self showLoadingIndicator:YES];
     [self requestFriends];
 }

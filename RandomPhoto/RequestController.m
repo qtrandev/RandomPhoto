@@ -41,6 +41,7 @@
 }
 
 - (void)logout {
+    NSLog(@"Logout requested");
     [requester logout];
 }
 
