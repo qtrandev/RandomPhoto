@@ -17,14 +17,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"ViewDidLoad called for RequestViewController");
     if (!requestController) {
         requestController = [[RequestController alloc] init];
     }
-    [self attemptFrictionlessLogin: ^(void) {
-        if ([requestController isSessionOpen]) {
-            [self afterFrictionlessLogin];
-        }
-    }];
+    if ([requestController isSessionOpen]) {
+        [self afterFrictionlessLogin];
+    } else {
+        [self attemptFrictionlessLogin: ^(void) {
+            if ([requestController isSessionOpen]) {
+                NSLog(@"Session is now open in callback(); Calling afterFrictionlessLogin()");
+                [self afterFrictionlessLogin];
+            }
+        }];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -50,12 +56,8 @@
 }
 
 - (void)attemptFrictionlessLogin: (RequestCallback)callback {
-    if (![requestController isSessionOpen]) {
-        NSLog(@"Session is not open on frictionless login - trying to open it");
-        [requestController frictionlesssLogin:callback];
-    } else {
-        callback();
-    }
+     NSLog(@"Trying to do frictionless login");
+    [requestController frictionlesssLogin:callback];
 }
 
 - (void)afterFrictionlessLogin {
