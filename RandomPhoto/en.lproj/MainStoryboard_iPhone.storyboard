@@ -226,7 +226,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zqv-MF-1u8">
-                                <rect key="frame" x="140" y="362" width="40" height="40"/>
+                                <rect key="frame" x="141" y="360" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label="Current Friend"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
@@ -244,7 +244,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BhL-GU-61u">
-                                <rect key="frame" x="243" y="362" width="50" height="40"/>
+                                <rect key="frame" x="242" y="360" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
@@ -261,7 +261,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Do-YJ-NF9">
-                                <rect key="frame" x="20" y="362" width="50" height="40"/>
+                                <rect key="frame" x="21" y="360" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
@@ -278,7 +278,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mFq-9n-kGB">
-                                <rect key="frame" x="70" y="362" width="50" height="40"/>
+                                <rect key="frame" x="71" y="360" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
@@ -295,7 +295,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uBz-AC-QGu">
-                                <rect key="frame" x="199" y="362" width="50" height="40"/>
+                                <rect key="frame" x="198" y="360" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
