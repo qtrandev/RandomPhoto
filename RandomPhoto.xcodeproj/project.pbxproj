@@ -22,6 +22,10 @@
 		7278EECD17051FA500FC8AA3 /* all friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 7278EECC17051FA500FC8AA3 /* all friends.png */; };
 		7278EECF170520B400FC8AA3 /* go.png in Resources */ = {isa = PBXBuildFile; fileRef = 7278EECE170520B400FC8AA3 /* go.png */; };
 		7278EED11706301E00FC8AA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7278EED01706301E00FC8AA3 /* QuartzCore.framework */; };
+		7290B3B3176BEC8E00CC36E3 /* MasterViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 7290B3B2176BEC8E00CC36E3 /* MasterViewController_iPad.m */; };
+		72BD8FA61718E0E30026ACFA /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72BD8FA51718E0E30026ACFA /* MyNavigationController.m */; };
+		72DFDB1C170D1F06004FC58A /* FlipSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 72DFDB1B170D1F06004FC58A /* FlipSegue.m */; };
+		72F9853E176BFB77001EA41B /* FriendViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F9853D176BFB77001EA41B /* FriendViewController_iPad.m */; };
 		CE426589165DD5D000CB29BF /* FlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE426588165DD5D000CB29BF /* FlipsideViewController.m */; };
 		CE5B252116615047001AA5A5 /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B252016615047001AA5A5 /* AlbumViewController.m */; };
 		CE7BC57B161BB7830072104B /* RandomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BC57A161BB7830072104B /* RandomViewController.m */; };
@@ -73,6 +77,14 @@
 		7278EECC17051FA500FC8AA3 /* all friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "all friends.png"; sourceTree = "<group>"; };
 		7278EECE170520B400FC8AA3 /* go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = go.png; sourceTree = "<group>"; };
 		7278EED01706301E00FC8AA3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7290B3B2176BEC8E00CC36E3 /* MasterViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController_iPad.m; sourceTree = "<group>"; };
+		7290B3B4176BECA200CC36E3 /* MasterViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController_iPad.h; sourceTree = "<group>"; };
+		72BD8FA41718E0E30026ACFA /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
+		72BD8FA51718E0E30026ACFA /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
+		72DFDB1A170D1F06004FC58A /* FlipSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipSegue.h; sourceTree = "<group>"; };
+		72DFDB1B170D1F06004FC58A /* FlipSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlipSegue.m; sourceTree = "<group>"; };
+		72F9853C176BFB77001EA41B /* FriendViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendViewController_iPad.h; sourceTree = "<group>"; };
+		72F9853D176BFB77001EA41B /* FriendViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendViewController_iPad.m; sourceTree = "<group>"; };
 		CE426587165DD5D000CB29BF /* FlipsideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipsideViewController.h; sourceTree = "<group>"; };
 		CE426588165DD5D000CB29BF /* FlipsideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlipsideViewController.m; sourceTree = "<group>"; };
 		CE5B251F16615047001AA5A5 /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
@@ -201,8 +213,14 @@
 				CE82264815EDE0F30027A592 /* MainStoryboard_iPad.storyboard */,
 				CE82264B15EDE0F30027A592 /* MasterViewController.h */,
 				CE82264C15EDE0F30027A592 /* MasterViewController.m */,
+				7290B3B4176BECA200CC36E3 /* MasterViewController_iPad.h */,
+				7290B3B2176BEC8E00CC36E3 /* MasterViewController_iPad.m */,
+				72F9853C176BFB77001EA41B /* FriendViewController_iPad.h */,
+				72F9853D176BFB77001EA41B /* FriendViewController_iPad.m */,
 				CE82264E15EDE0F30027A592 /* LoginViewController.h */,
 				CE82264F15EDE0F30027A592 /* LoginViewController.m */,
+				72BD8FA41718E0E30026ACFA /* MyNavigationController.h */,
+				72BD8FA51718E0E30026ACFA /* MyNavigationController.m */,
 				CEC8975E16323A8300182FBA /* RequestViewController.h */,
 				CEC8975F16323A8300182FBA /* RequestViewController.m */,
 				CE7BC579161BB7820072104B /* RandomViewController.h */,
@@ -219,6 +237,8 @@
 				CEC897661637734900182FBA /* FBRequester.m */,
 				CEA23896164E01FB005F773D /* DataHolder.h */,
 				CEA23897164E01FB005F773D /* DataHolder.m */,
+				72DFDB1A170D1F06004FC58A /* FlipSegue.h */,
+				72DFDB1B170D1F06004FC58A /* FlipSegue.m */,
 				CE82263A15EDE0F30027A592 /* Supporting Files */,
 			);
 			path = RandomPhoto;
@@ -386,6 +406,10 @@
 				CEA23898164E01FB005F773D /* DataHolder.m in Sources */,
 				CE426589165DD5D000CB29BF /* FlipsideViewController.m in Sources */,
 				CE5B252116615047001AA5A5 /* AlbumViewController.m in Sources */,
+				72DFDB1C170D1F06004FC58A /* FlipSegue.m in Sources */,
+				72BD8FA61718E0E30026ACFA /* MyNavigationController.m in Sources */,
+				7290B3B3176BEC8E00CC36E3 /* MasterViewController_iPad.m in Sources */,
+				72F9853E176BFB77001EA41B /* FriendViewController_iPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
