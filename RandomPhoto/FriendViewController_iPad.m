@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    currentFriendId = @"220906";
+    if (currentFriendId == nil) currentFriendId = @"220906";
     [self showImage];
 }
 
@@ -65,8 +65,6 @@
             //[self resetZoom];
             //[self showLoadingIndicator:NO];
             [scrollView setContentSize:imageView.frame.size];
-            NSLog(@"Image size is %f,%f",imageView.frame.size.width,imageView.bounds.size.height);
-            NSLog(@"Scroll size is %f,%f",scrollView.frame.size.width,scrollView.bounds.size.height);
         });
     });
 }

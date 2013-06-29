@@ -267,4 +267,22 @@
     return data.currentAlbum;
 }
 
+- (void)requestFriendList: (ResultCallback)callback {
+    ResultCallback dataCallback = ^(id result) {
+        NSMutableArray* friends = [[NSMutableArray alloc] init];
+        if (result != nil) {
+            data.friends = result;
+            for (NSDictionary<FBGraphUser>* friend in result) {
+                [friends addObject:friend.id];
+            }
+            NSLog(@"Got %u friends", friends.count);
+            //NSDictionary<FBGraphUser>* friend1 = (NSDictionary<FBGraphUser>*) [data.friends objectAtIndex:arc4random()%data.friends.count];
+        } else {
+            NSLog(@"Cannot request friend list.");
+        }
+        callback(friends);
+    };
+    [requester requestRandomFriend:dataCallback];
+}
+
 @end

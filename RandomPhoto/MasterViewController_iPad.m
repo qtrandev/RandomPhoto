@@ -11,12 +11,45 @@
 @interface MasterViewController_iPad ()
 
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (strong, nonatomic) NSMutableArray* friendList;
 - (void)configureView;
 @end
 
 @implementation MasterViewController_iPad
 
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize requestController;
+
+- (IBAction)friendButtonClicked:(id)sender {
+    FriendViewController_iPad* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvci1"];
+    if (self.friendList.count > 0) {
+        fvc.currentFriendId = [self.friendList objectAtIndex:arc4random()%self.friendList.count];
+    }
+    [self.navigationController pushViewController:fvc animated:YES];
+}
+
+- (void)requestFriends
+{
+    if (!requestController) {
+        requestController = [[RequestController alloc] init];
+    }
+    [requestController frictionlesssLogin: ^(void) {
+        NSLog(@"Requesting to open session.");
+        if ([requestController isSessionOpen]) {
+            NSLog(@"Session is open.");
+            ResultCallback friendsCallback = ^(id friendList) {
+                NSMutableArray* friendListArray = (NSMutableArray*)friendList;
+                if (friendListArray.count > 0) {
+                    NSLog(@"Got %u friends in master view", friendListArray.count);
+                    self.friendList = friendListArray;
+                } else {
+                    NSLog(@"Got nothing in master view");
+                }
+            };
+            [requestController requestFriendList:friendsCallback];
+        }
+    }];
+}
 
 - (void)awakeFromNib
 {
@@ -31,6 +64,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.friendList = [[NSMutableArray alloc] init];
+    [self requestFriends];
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];

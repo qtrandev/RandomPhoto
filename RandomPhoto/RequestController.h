@@ -31,6 +31,7 @@
 - (int)getCurrentPhotoIndex;
 - (int)getCurrentPhotoCount;
 - (NSString*)getCurrentAlbumId;
+- (void)requestFriendList:(ResultCallback)callback;
 
 @property BOOL requestInProgress;
 
