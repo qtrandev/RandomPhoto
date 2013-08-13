@@ -19,4 +19,5 @@
 
 - (IBAction)tagClicked:(id)sender;
 - (IBAction)albumClicked:(id)sender;
+- (IBAction)randomClicked:(id)sender;
 @end

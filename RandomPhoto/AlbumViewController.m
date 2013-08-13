@@ -37,6 +37,10 @@
     self.navigationController.viewControllers = navigationArray;
 }
 
+- (IBAction)randomClicked:(id)sender {
+    [self selectAlbum:arc4random()%albumsList.count];
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -75,7 +79,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    FBGraphObject *album = [albumsList objectAtIndex:indexPath.row];
+    [self selectAlbum:indexPath.row];
+}
+
+- (void)selectAlbum:(NSInteger)rowId
+{
+    FBGraphObject *album = [albumsList objectAtIndex:rowId];
     FriendViewController* fvc = [self.storyboard instantiateViewControllerWithIdentifier:@"fvc1"];
     fvc.currentFriend = self.currentFriend;
     [self.navigationController pushViewController:fvc animated:YES];
