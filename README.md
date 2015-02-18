@@ -1,10 +1,8 @@
-RandomPhoto
-===========
+# Overview
 
 Random Facebook Photo iOS App
 
-Screen Shots
-============
+# Screen Shots
 
 ![Random Photo screenshot 1](http://www.qtrandev.com/images/RandomPhoto1-th.png)
 ![Random Photo screenshot 2](http://www.qtrandev.com/images/RandomPhoto2-th.png)
